@@ -12,6 +12,8 @@
 		66BD2AF81E213B8C00A6343E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66BD2AF61E213B8C00A6343E /* Main.storyboard */; };
 		66BD2AFA1E213B8C00A6343E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66BD2AF91E213B8C00A6343E /* Assets.xcassets */; };
 		66BD2AFD1E213B8C00A6343E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66BD2AFB1E213B8C00A6343E /* LaunchScreen.storyboard */; };
+		66BD2B061E213BB500A6343E /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66BD2B051E213BB500A6343E /* MultipeerConnectivity.framework */; };
+		66BD2B091E213C2100A6343E /* MultipeerCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BD2B081E213C2100A6343E /* MultipeerCommunication.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		66BD2AF91E213B8C00A6343E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66BD2AFC1E213B8C00A6343E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66BD2AFE1E213B8C00A6343E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66BD2B051E213BB500A6343E /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		66BD2B081E213C2100A6343E /* MultipeerCommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerCommunication.swift; path = Logic/MultipeerCommunication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66BD2B061E213BB500A6343E /* MultipeerConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,7 @@
 			children = (
 				66BD2AF11E213B8C00A6343E /* WerewolfTest */,
 				66BD2AF01E213B8C00A6343E /* Products */,
+				66BD2B041E213BB500A6343E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +62,29 @@
 			children = (
 				66BD2AF21E213B8C00A6343E /* AppDelegate.swift */,
 				66BD2AF41E213B8C00A6343E /* ViewController.swift */,
+				66BD2B071E213C0500A6343E /* Logic */,
 				66BD2AF61E213B8C00A6343E /* Main.storyboard */,
 				66BD2AF91E213B8C00A6343E /* Assets.xcassets */,
 				66BD2AFB1E213B8C00A6343E /* LaunchScreen.storyboard */,
 				66BD2AFE1E213B8C00A6343E /* Info.plist */,
 			);
 			path = WerewolfTest;
+			sourceTree = "<group>";
+		};
+		66BD2B041E213BB500A6343E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66BD2B051E213BB500A6343E /* MultipeerConnectivity.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		66BD2B071E213C0500A6343E /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				66BD2B081E213C2100A6343E /* MultipeerCommunication.swift */,
+			);
+			name = Logic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -91,7 +114,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Adam Gastineau";
 				TargetAttributes = {
 					66BD2AEE1E213B8C00A6343E = {
@@ -138,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66BD2AF51E213B8C00A6343E /* ViewController.swift in Sources */,
+				66BD2B091E213C2100A6343E /* MultipeerCommunication.swift in Sources */,
 				66BD2AF31E213B8C00A6343E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +206,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -204,7 +229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -232,6 +257,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -248,7 +274,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -302,6 +328,7 @@
 				66BD2B031E213B8C00A6343E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
