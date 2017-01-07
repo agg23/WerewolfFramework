@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6647C4E81E218EF100650FFF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647C4E71E218EF100650FFF /* Config.swift */; };
 		66BD2AF31E213B8C00A6343E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BD2AF21E213B8C00A6343E /* AppDelegate.swift */; };
 		66BD2AF51E213B8C00A6343E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BD2AF41E213B8C00A6343E /* ViewController.swift */; };
 		66BD2AF81E213B8C00A6343E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66BD2AF61E213B8C00A6343E /* Main.storyboard */; };
@@ -16,7 +17,19 @@
 		66BD2B091E213C2100A6343E /* MultipeerCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BD2B081E213C2100A6343E /* MultipeerCommunication.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6647C5021E21938A00650FFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6647C4FE1E21938900650FFF /* WerewolfFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6647C4F31E21938900650FFF;
+			remoteInfo = WerewolfFramework;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6647C4E71E218EF100650FFF /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Logic/Config.swift; sourceTree = "<group>"; };
+		6647C4FE1E21938900650FFF /* WerewolfFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WerewolfFramework.xcodeproj; path = WerewolfFramework/WerewolfFramework.xcodeproj; sourceTree = "<group>"; };
 		66BD2AEF1E213B8C00A6343E /* WerewolfTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WerewolfTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66BD2AF21E213B8C00A6343E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66BD2AF41E213B8C00A6343E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6647C4FF1E21938900650FFF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6647C5031E21938A00650FFF /* WerewolfFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		66BD2AE61E213B8C00A6343E = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +95,7 @@
 		66BD2B041E213BB500A6343E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6647C4FE1E21938900650FFF /* WerewolfFramework.xcodeproj */,
 				66BD2B051E213BB500A6343E /* MultipeerConnectivity.framework */,
 			);
 			name = Frameworks;
@@ -83,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				66BD2B081E213C2100A6343E /* MultipeerCommunication.swift */,
+				6647C4E71E218EF100650FFF /* Config.swift */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -135,12 +158,28 @@
 			mainGroup = 66BD2AE61E213B8C00A6343E;
 			productRefGroup = 66BD2AF01E213B8C00A6343E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6647C4FF1E21938900650FFF /* Products */;
+					ProjectRef = 6647C4FE1E21938900650FFF /* WerewolfFramework.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				66BD2AEE1E213B8C00A6343E /* WerewolfTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6647C5031E21938A00650FFF /* WerewolfFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WerewolfFramework.framework;
+			remoteRef = 6647C5021E21938A00650FFF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		66BD2AED1E213B8C00A6343E /* Resources */ = {
@@ -161,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66BD2AF51E213B8C00A6343E /* ViewController.swift in Sources */,
+				6647C4E81E218EF100650FFF /* Config.swift in Sources */,
 				66BD2B091E213C2100A6343E /* MultipeerCommunication.swift in Sources */,
 				66BD2AF31E213B8C00A6343E /* AppDelegate.swift in Sources */,
 			);

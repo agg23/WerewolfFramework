@@ -9,20 +9,14 @@
 import UIKit
 import MultipeerConnectivity
 
-class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCBrowserViewControllerDelegate, MCSessionDelegate {
+class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCBrowserViewControllerDelegate, MCSessionDelegate {
 	static let shared = MultipeerCommunication()
 	
 	private static let serviceType = "were2-service"
 	
 	var displayName: String {
 		didSet {
-			self.localPeerID = MCPeerID(displayName: self.displayName)
-			
-			self.advertiser = MCNearbyServiceAdvertiser(peer: localPeerID, discoveryInfo: nil, serviceType: MultipeerCommunication.serviceType)
-			
-			self.browser = MCNearbyServiceBrowser(peer: localPeerID, serviceType: MultipeerCommunication.serviceType)
-			
-			self.session = MCSession(peer: localPeerID, securityIdentity: nil, encryptionPreference: .none)
+			displayNameUpdate()
 			
 			self.advertiser.delegate = self
 			self.session.delegate = self
@@ -51,7 +45,6 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCBro
 		self.advertiser = MCNearbyServiceAdvertiser(peer: localPeerID, discoveryInfo: nil, serviceType: MultipeerCommunication.serviceType)
 		
 		self.browser = MCNearbyServiceBrowser(peer: localPeerID, serviceType: MultipeerCommunication.serviceType)
-//		self.browser.delegate = self
 		
 		self.session = MCSession(peer: localPeerID, securityIdentity: nil, encryptionPreference: .none)
 		
@@ -62,6 +55,16 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCBro
 		super.init()
 		self.advertiser.delegate = self
 		self.session.delegate = self
+	}
+	
+	private func displayNameUpdate() {
+		self.localPeerID = MCPeerID(displayName: self.displayName)
+		
+		self.advertiser = MCNearbyServiceAdvertiser(peer: localPeerID, discoveryInfo: nil, serviceType: MultipeerCommunication.serviceType)
+		
+		self.browser = MCNearbyServiceBrowser(peer: localPeerID, serviceType: MultipeerCommunication.serviceType)
+		
+		self.session = MCSession(peer: localPeerID, securityIdentity: nil, encryptionPreference: .none)
 	}
 	
 	func startAdvertising() {
@@ -102,23 +105,39 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCBro
 	// MARK: MCSessionDelegate -
 	
 	func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+		DispatchQueue.main.async {
+			NotificationCenter.default.post(name: .MessageReceived, object: data)
+		}
+		
 		if let string = String(data: data, encoding: .utf8) {
-			print(string)
+			print("Received message: " + string)
 		}
 	}
 	
 	func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
 		switch state {
 		case .connected:
-			print("State Connected")
+			print("Device Connected")
 		case .connecting:
-			print("State connecting")
+			print("Device Connecting")
 		case .notConnected:
-			print("State not connected")
+			print("Device Not Connected")
 		}
 		
 		if state == .connected && !self.isHost {
 			self.host = peerID
+			
+			DispatchQueue.main.async {
+				NotificationCenter.default.post(name: .DeviceConnected, object: nil)
+			}
+		} else if state == .notConnected {
+			if session.connectedPeers.count == 0 {
+				self.isHost = false
+			}
+			
+			DispatchQueue.main.async {
+				NotificationCenter.default.post(name: .DeviceDisconnected, object: nil)
+			}
 		}
 	}
 	
@@ -140,10 +159,8 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCBro
 	
 	// MARK: MCNearbyServiceAdvertiserDelegate -
 	
-	func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
-	                didReceiveInvitationFromPeer peerID: MCPeerID,
-	                withContext context: Data?,
-	                invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+	func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+		
 		if self.blockedPeers.contains(peerID) {
 			invitationHandler(false, nil)
 			return
@@ -169,6 +186,20 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCBro
 		self.viewController?.present(alertController, animated: true, completion: nil)
 	}
 	
+	// MARK: MCNearbyServiceBrowserDelegate -
+	
+	func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+		print("Peer lost")
+	}
+	
+	func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+		print("Peer found")
+	}
+	
+	func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+		print("Did not start")
+	}
+	
 	// MARK: MCBrowserViewControllerDelegate -
 	
 	func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
@@ -179,5 +210,9 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCBro
 	func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
 		print("Browser view controller canceled")
 		self.browserViewController?.dismiss(animated: true, completion: nil)
+	}
+	
+	func browserViewController(_ browserViewController: MCBrowserViewController, shouldPresentNearbyPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) -> Bool {
+		return true
 	}
 }
