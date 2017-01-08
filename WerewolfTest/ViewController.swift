@@ -10,15 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 	@IBOutlet weak var textField: UITextField!
+	
+	var host: GameHost?
+	var client: GameClient?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		MultipeerCommunication.shared.viewController = self
 		
-		let gameController = GameController()
-		MultipeerCommunication.shared.delegate = gameController
-		gameController.newGame(name: "Test Game")
+		self.client = GameClient()
+		
+		MultipeerCommunication.shared.delegate = self.client!
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -44,6 +47,13 @@ class ViewController: UIViewController {
 	
 	@IBAction func hostPressed(_ sender: Any) {
 		MultipeerCommunication.shared.startBrowser()
+		
+		self.host = GameHost(client: self.client!)
+	}
+	
+	@IBAction func startGamePressed(_ sender: Any) {
+		self.host?.registerHostPlayer(with: "Host Player")
+		self.host?.newGame(name: "Test Game Name")
 	}
 }
 

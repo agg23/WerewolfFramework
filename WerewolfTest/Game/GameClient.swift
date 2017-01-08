@@ -16,6 +16,8 @@ class GameClient: GameController {
 	var state: WWState?
 	var player: WWPlayer?
 	
+	weak var gameHost: GameHost?
+	
 	init() {
 		self.name = UIDevice.current.name
 	}
@@ -54,6 +56,12 @@ class GameClient: GameController {
 	
 	func send(data peerData: PeerData) {
 		let data = NSKeyedArchiver.archivedData(withRootObject: peerData)
+		
+		if self.gameHost != nil {
+			// Send to host
+			self.gameHost?.messageReceived(data: data, from: MultipeerCommunication.shared.localPeerID.displayName)
+			return
+		}
 		
 		MultipeerCommunication.shared.sendToHost(message: data)
 	}

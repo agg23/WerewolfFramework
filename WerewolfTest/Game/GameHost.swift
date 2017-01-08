@@ -10,32 +10,38 @@ import Foundation
 import WerewolfFramework
 
 class GameHost: GameController {
-	var game: WWGame?
+	var game: WWGame
+	
+	var host: WWPlayer?
+	var hostClient: GameClient
 	
 	var seenPlayerIDs: [String]
 	
-	init() {
+	init(client: GameClient) {
+		self.game = WWGame(name: "Default Game")
+		
+		self.hostClient = client
+		
 		self.seenPlayerIDs = Array()
 	}
 	
 	func newGame(name: String) {
-		self.game = WWGame(name: name)
+		self.game.name = name
 		
-		self.game?.registerPlayer(name: "Adam", internalIdentifier: "AdamID")
-		self.game?.registerPlayer(name: "Anna", internalIdentifier: "AnnaID")
-		self.game?.registerPlayer(name: "Christopher", internalIdentifier: "Christopher")
-		self.game?.registerNonHumanPlayers(count: 3)
+//		self.game.registerPlayer(name: "Adam", internalIdentifier: "AdamID")
+//		self.game.registerPlayer(name: "Anna", internalIdentifier: "AnnaID")
+//		self.game.registerPlayer(name: "Christopher", internalIdentifier: "Christopher")
+		self.game.registerNonHumanPlayers(count: 3)
 		
-		self.game?.register(character: WWTroublemaker())
-		self.game?.register(character: WWWitch())
-		self.game?.register(character: WWSeer())
-		self.game?.register(character: WWWerewolf())
-		self.game?.register(character: WWWerewolf())
-		self.game?.register(character: WWMinion())
+		let characters = [WWWerewolf(), WWWerewolf(), WWTroublemaker(), WWWitch(), WWSeer(), WWMinion()]
 		
-		self.game?.generateRound()
+		for i in 0 ..< self.game.players.count + self.game.nonHumanPlayers.count {
+			self.game.register(character: characters[i])
+		}
 		
-		guard let currentState = self.game?.state else {
+		self.game.generateRound()
+		
+		guard let currentState = self.game.state else {
 			print("[ERROR] Invalid state")
 			return
 		}
@@ -44,23 +50,23 @@ class GameHost: GameController {
 			print("Player \(player.name) was assigned character \(character.name)")
 		}
 		
-		// TODO: Remove
-		// Test PeerData
+		let peerData = PeerData(state: currentState)
 		
-		let peerData = PeerData(action: WWAction(ordering: [.peek], delta: [.peek: WWActionData.init(first: WWPlayer(name: "Test", internalIdentifier: "test", human: true), second: WWPlayer(name: "Test2", internalIdentifier: "test2", human: true))]))
 		let data = NSKeyedArchiver.archivedData(withRootObject: peerData)
+		MultipeerCommunication.shared.sendToAll(message: data)
 		
-		let peerData2 = NSKeyedUnarchiver.unarchiveObject(with: data) as? PeerData
-		
-		guard let peer = peerData2 else {
-			print("Decoding failed")
-			return
-		}
-		
-		print(peerData.command)
-		print(peer.command)
-		
-		print(peerData === peer)
+		// Send to host's client
+		sendToHost(data: data)
+	}
+	
+	// MARK: - Host Player
+	
+	func registerHostPlayer(with name: String) {
+		self.host = self.game.registerPlayer(name: name, internalIdentifier: "host")
+	}
+	
+	func sendToHost(data: Data) {
+		self.hostClient.messageReceived(data: data, from: MultipeerCommunication.shared.localPeerID.displayName)
 	}
 	
 	// MARK: - Communication
@@ -68,11 +74,18 @@ class GameHost: GameController {
 	func send(data peerData: PeerData, to player: WWPlayer) {
 		let data = NSKeyedArchiver.archivedData(withRootObject: peerData)
 		
+		if self.host == player {
+			print("Rerouting data to the host's client")
+			sendToHost(data: data)
+			
+			return
+		}
+		
 		MultipeerCommunication.shared.send(message: data, to: player.internalIdentifier)
 	}
 	
 	func sendStatus(to player: WWPlayer) {
-		guard let state = self.game?.state else {
+		guard let state = self.game.state else {
 			return
 		}
 		
@@ -92,9 +105,7 @@ class GameHost: GameController {
 		
 		for playerID in self.seenPlayerIDs {
 			if playerID == sender {
-				if let player = self.game?.registerPlayer(name: name, internalIdentifier: playerID) {
-					sendStatus(to: player)
-				}
+				let _ = self.game.registerPlayer(name: name, internalIdentifier: playerID)
 				return
 			}
 		}
