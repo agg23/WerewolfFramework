@@ -23,6 +23,8 @@ class GameHost: GameController {
 		self.hostClient = client
 		
 		self.seenPlayerIDs = Array()
+		
+		self.hostClient.gameHost = self
 	}
 	
 	func newGame(name: String) {
@@ -46,7 +48,7 @@ class GameHost: GameController {
 			return
 		}
 		
-		for (player, character) in currentState.assignments {
+		for (player, character) in currentState.playerAssignments {
 			print("Player \(player.name) was assigned character \(character.name)")
 		}
 		
@@ -56,6 +58,7 @@ class GameHost: GameController {
 		MultipeerCommunication.shared.sendToAll(message: data)
 		
 		// Send to host's client
+		sendToHost(data: data)
 		sendToHost(data: data)
 	}
 	

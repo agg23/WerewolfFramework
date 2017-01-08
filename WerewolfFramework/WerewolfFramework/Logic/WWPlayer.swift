@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class WWPlayer: NSObject, NSCoding {
+public class WWPlayer: NSObject, NSCoding, NSCopying {
 	public let isHumanPlayer: Bool
 	
 	public var name: String
@@ -24,7 +24,7 @@ public class WWPlayer: NSObject, NSCoding {
 	// MARK: Hashable -
 	
 	override public var hashValue: Int {
-		return name.hashValue
+		return self.name.hashValue + self.internalIdentifier.hashValue
 	}
 	
 	public static func ==(lhs: WWPlayer, rhs: WWPlayer) -> Bool {
@@ -55,5 +55,11 @@ public class WWPlayer: NSObject, NSCoding {
 		}
 		
 		self.internalIdentifier = id
+	}
+	
+	// MARK: - NSCopying
+	
+	public func copy(with zone: NSZone? = nil) -> Any {
+		return WWPlayer(name: self.name, internalIdentifier: self.internalIdentifier, human: self.isHumanPlayer)
 	}
 }

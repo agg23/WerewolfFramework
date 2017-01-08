@@ -30,12 +30,10 @@ class GameClient: GameController {
 			return
 		}
 		
-		if self.player == nil {
-			for player in state.players {
-				if player.name == MultipeerCommunication.shared.localPeerID.displayName {
-					self.player = player
-					break
-				}
+		for player in state.players {
+			if (self.gameHost != nil && player.internalIdentifier == "host") || player.name == MultipeerCommunication.shared.localPeerID.displayName {
+				self.player = player
+				break
 			}
 		}
 		
@@ -45,7 +43,9 @@ class GameClient: GameController {
 			return
 		}
 		
-		guard let character = state.assignments[player] else {
+		let assignments = state.playerAssignments
+		
+		guard let character = assignments[player] else {
 			print("[ERROR] Stateupdate did not assign client's player. Disconnecting")
 			MultipeerCommunication.shared.disconnect()
 			return

@@ -35,20 +35,12 @@ public class WWGame {
 		
 		let shuffledCharacters = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: self.characters) as! [WWCharacter]
 		
-		var assignments = Dictionary<WWPlayer, WWCharacter>()
+		var assignments = [Int: WWCharacter]()
 		
 		for i in 0 ..< shuffledCharacters.count {
 			let character = shuffledCharacters[i]
 			
-			let player: WWPlayer
-			
-			if i < self.players.count {
-				player = self.players[i]
-			} else {
-				player = self.nonHumanPlayers[i - self.players.count]
-			}
-			
-			assignments[player] = character
+			assignments[i] = character
 		}
 		
 		self.state = WWState(players: self.players + self.nonHumanPlayers, assignments: assignments)

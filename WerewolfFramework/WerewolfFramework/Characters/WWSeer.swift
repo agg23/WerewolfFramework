@@ -9,11 +9,12 @@
 import Foundation
 
 public class WWSeer: WWCharacter {
-	override public init() {
-		super.init()
-		
-		self.name = "Seer"
-		self.instructions = "I am a Seer"
+	public init() {
+		super.init(name: "Seer", instructions: "I am a Seer", turnOrder: .concurrent)
+	}
+	
+	public required init?(coder decoder: NSCoder) {
+		super.init(coder: decoder)
 	}
 	
 	override public func perform(action: WWAction, with state: WWState) {

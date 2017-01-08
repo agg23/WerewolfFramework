@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class WWCharacter: Equatable {
+public class WWCharacter: NSObject, NSCoding {
 	
-	public enum TurnOrder {
+	public enum TurnOrder: Int {
 		case concurrent
 		case last
 		case inactive
@@ -22,10 +22,10 @@ public class WWCharacter: Equatable {
 	
 	public var instructions: String
 	
-	public init() {
-		self.name = "Default Character"
-		self.turnOrder = .inactive
-		self.instructions = "Default character instructions (PLEASE REPLACE)"
+	public init(name: String, instructions: String, turnOrder: TurnOrder) {
+		self.name = name
+		self.turnOrder = turnOrder
+		self.instructions = instructions
 	}
 	
 	/**
@@ -37,5 +37,33 @@ public class WWCharacter: Equatable {
 	
 	public static func ==(lhs: WWCharacter, rhs: WWCharacter) -> Bool {
 		return lhs.turnOrder == rhs.turnOrder && lhs.name == rhs.name
+	}
+	
+	// MARK: - NSCoding
+	
+	public func encode(with coder: NSCoder) {
+		coder.encode(self.name, forKey: "name")
+		
+		coder.encode(self.turnOrder.rawValue, forKey: "order")
+		
+		coder.encode(self.instructions, forKey: "instructions")
+	}
+	
+	public required init?(coder decoder: NSCoder) {
+		guard let name = decoder.decodeObject(forKey: "name") as? String else {
+			print("[ERROR] Cannot decode character name")
+			return nil
+		}
+		
+		self.name = name
+				
+		self.turnOrder = TurnOrder(rawValue: decoder.decodeInteger(forKey: "order")) ?? .inactive
+		
+		guard let instructions = decoder.decodeObject(forKey: "instructions") as? String else {
+			print("[ERROR] Cannot decode character instructions")
+			return nil
+		}
+		
+		self.instructions = instructions
 	}
 }
