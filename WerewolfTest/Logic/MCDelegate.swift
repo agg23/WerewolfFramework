@@ -9,5 +9,8 @@
 import Foundation
 
 protocol MCDelegate {
+	func connected(device: String)
+	func disconnected(device: String)
+	
 	func messageReceived(data: Data, from sender: String)
 }

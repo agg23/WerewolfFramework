@@ -95,12 +95,23 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		send(message: message, to: [self.host!])
 	}
 	
+	func send(message: Data, to id: String) {
+		for peer in self.session.connectedPeers {
+			if peer.displayName == id {
+				send(message: message, to: [peer])
+				return
+			}
+		}
+		
+		print("[ERROR] No peer by id \(id)")
+	}
+	
 	private func send(message: Data, to hosts: [MCPeerID]) {
 		do {
 			try self.session.send(message, toPeers: hosts, with: .reliable)
 		}
 		catch {
-			print("[Error] \(error)")
+			print("[ERROR] \(error)")
 		}
 	}
 	
@@ -133,6 +144,7 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 			
 			DispatchQueue.main.async {
 				NotificationCenter.default.post(name: .DeviceConnected, object: peerID.displayName)
+				self.delegate?.connected(device: peerID.displayName)
 			}
 		} else if state == .notConnected {
 			if session.connectedPeers.count == 0 {
@@ -141,6 +153,7 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 			
 			DispatchQueue.main.async {
 				NotificationCenter.default.post(name: .DeviceDisconnected, object: peerID.displayName)
+				self.delegate?.disconnected(device: peerID.displayName)
 			}
 		}
 	}

@@ -15,11 +15,13 @@
 		66BD2AFD1E213B8C00A6343E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66BD2AFB1E213B8C00A6343E /* LaunchScreen.storyboard */; };
 		66BD2B061E213BB500A6343E /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66BD2B051E213BB500A6343E /* MultipeerConnectivity.framework */; };
 		66BD2B091E213C2100A6343E /* MultipeerCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BD2B081E213C2100A6343E /* MultipeerCommunication.swift */; };
-		66E7B1D81E2288B400A4B8BD /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1D71E2288B400A4B8BD /* GameController.swift */; };
+		66E7B1D81E2288B400A4B8BD /* GameHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1D71E2288B400A4B8BD /* GameHost.swift */; };
 		66E7B1DE1E2288DE00A4B8BD /* WerewolfFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6647C5031E21938A00650FFF /* WerewolfFramework.framework */; };
 		66E7B1DF1E2288DE00A4B8BD /* WerewolfFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6647C5031E21938A00650FFF /* WerewolfFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		66E7B1EF1E22919900A4B8BD /* MCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1EE1E22919900A4B8BD /* MCDelegate.swift */; };
 		66E7B1F11E2292E000A4B8BD /* PeerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1F01E2292E000A4B8BD /* PeerData.swift */; };
+		66E7B1F81E22C74A00A4B8BD /* GameClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1F71E22C74A00A4B8BD /* GameClient.swift */; };
+		66E7B1FA1E22C7AC00A4B8BD /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1F91E22C7AC00A4B8BD /* GameController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,9 +67,11 @@
 		66BD2AFE1E213B8C00A6343E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66BD2B051E213BB500A6343E /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		66BD2B081E213C2100A6343E /* MultipeerCommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerCommunication.swift; path = Logic/MultipeerCommunication.swift; sourceTree = "<group>"; };
-		66E7B1D71E2288B400A4B8BD /* GameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameController.swift; path = Game/GameController.swift; sourceTree = "<group>"; };
+		66E7B1D71E2288B400A4B8BD /* GameHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameHost.swift; path = Game/GameHost.swift; sourceTree = "<group>"; };
 		66E7B1EE1E22919900A4B8BD /* MCDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MCDelegate.swift; path = Logic/MCDelegate.swift; sourceTree = "<group>"; };
 		66E7B1F01E2292E000A4B8BD /* PeerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeerData.swift; path = Game/PeerData.swift; sourceTree = "<group>"; };
+		66E7B1F71E22C74A00A4B8BD /* GameClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameClient.swift; path = Game/GameClient.swift; sourceTree = "<group>"; };
+		66E7B1F91E22C7AC00A4B8BD /* GameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameController.swift; path = Game/GameController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +150,9 @@
 		66E7B1D51E22889800A4B8BD /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				66E7B1D71E2288B400A4B8BD /* GameController.swift */,
+				66E7B1F91E22C7AC00A4B8BD /* GameController.swift */,
+				66E7B1D71E2288B400A4B8BD /* GameHost.swift */,
+				66E7B1F71E22C74A00A4B8BD /* GameClient.swift */,
 				66E7B1F01E2292E000A4B8BD /* PeerData.swift */,
 			);
 			name = Game;
@@ -251,9 +257,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				66BD2AF51E213B8C00A6343E /* ViewController.swift in Sources */,
-				66E7B1D81E2288B400A4B8BD /* GameController.swift in Sources */,
+				66E7B1D81E2288B400A4B8BD /* GameHost.swift in Sources */,
 				6647C4E81E218EF100650FFF /* Config.swift in Sources */,
 				66BD2B091E213C2100A6343E /* MultipeerCommunication.swift in Sources */,
+				66E7B1FA1E22C7AC00A4B8BD /* GameController.swift in Sources */,
+				66E7B1F81E22C74A00A4B8BD /* GameClient.swift in Sources */,
 				66E7B1F11E2292E000A4B8BD /* PeerData.swift in Sources */,
 				66E7B1EF1E22919900A4B8BD /* MCDelegate.swift in Sources */,
 				66BD2AF31E213B8C00A6343E /* AppDelegate.swift in Sources */,
