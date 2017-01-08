@@ -8,13 +8,13 @@
 
 import Foundation
 
-class WWPlayer: Hashable {
-	let isHumanPlayer: Bool
+public class WWPlayer: NSObject, NSCoding {
+	public let isHumanPlayer: Bool
 	
-	var name: String
-	var internalIdentifier: String
+	public var name: String
+	public var internalIdentifier: String
 	
-	init(name: String, internalIdentifier: String, human: Bool) {
+	public init(name: String, internalIdentifier: String, human: Bool) {
 		self.isHumanPlayer = human
 		
 		self.name = name
@@ -23,12 +23,37 @@ class WWPlayer: Hashable {
 	
 	// MARK: Hashable -
 	
-	var hashValue: Int {
+	override public var hashValue: Int {
 		return name.hashValue
 	}
 	
-	static func ==(lhs: WWPlayer, rhs: WWPlayer) -> Bool {
+	public static func ==(lhs: WWPlayer, rhs: WWPlayer) -> Bool {
 		return lhs.name == rhs.name && lhs.internalIdentifier == rhs.internalIdentifier
 	}
-
+	
+	// MARK: NSCoding -
+	
+	public func encode(with coder: NSCoder) {
+		coder.encode(self.isHumanPlayer, forKey: "human")
+		coder.encode(self.name, forKey: "name")
+		coder.encode(self.internalIdentifier, forKey: "id")
+	}
+	
+	public required init?(coder decoder: NSCoder) {
+		self.isHumanPlayer = decoder.decodeBool(forKey: "human")
+		
+		guard let name = decoder.decodeObject(forKey: "name") as? String else {
+			print("[ERROR] Cannot decode player name")
+			return nil
+		}
+		
+		self.name = name
+		
+		guard let id = decoder.decodeObject(forKey: "id") as? String else {
+			print("[ERROR] Cannot decode player id")
+			return nil
+		}
+		
+		self.internalIdentifier = id
+	}
 }

@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		6647C4F81E21938900650FFF /* WerewolfFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6647C4F61E21938900650FFF /* WerewolfFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		66E7B1D41E22874F00A4B8BD /* WWActionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1D31E22874F00A4B8BD /* WWActionData.swift */; };
+		66E7B1E41E228B6D00A4B8BD /* WWTroublemaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1E31E228B6D00A4B8BD /* WWTroublemaker.swift */; };
+		66E7B1E61E228BF600A4B8BD /* WWWitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1E51E228BF600A4B8BD /* WWWitch.swift */; };
+		66E7B1E81E228C1F00A4B8BD /* WWSeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1E71E228C1F00A4B8BD /* WWSeer.swift */; };
+		66E7B1EB1E228E1D00A4B8BD /* WWWerewolf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1EA1E228E1D00A4B8BD /* WWWerewolf.swift */; };
+		66E7B1ED1E228E5500A4B8BD /* WWMinion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1EC1E228E5500A4B8BD /* WWMinion.swift */; };
+		66E7B1F61E22C08A00A4B8BD /* DictionaryMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1F51E22C08A00A4B8BD /* DictionaryMap.swift */; };
 		66EAEE911E2195FA0075E277 /* WWCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE901E2195FA0075E277 /* WWCharacter.swift */; };
 		66EAEE941E21984B0075E277 /* WWAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE931E21984B0075E277 /* WWAction.swift */; };
 		66EAEE971E2198C20075E277 /* WWState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE961E2198C20075E277 /* WWState.swift */; };
@@ -21,6 +27,12 @@
 		6647C4F61E21938900650FFF /* WerewolfFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WerewolfFramework.h; sourceTree = "<group>"; };
 		6647C4F71E21938900650FFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66E7B1D31E22874F00A4B8BD /* WWActionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWActionData.swift; path = Actions/WWActionData.swift; sourceTree = "<group>"; };
+		66E7B1E31E228B6D00A4B8BD /* WWTroublemaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWTroublemaker.swift; path = Characters/WWTroublemaker.swift; sourceTree = "<group>"; };
+		66E7B1E51E228BF600A4B8BD /* WWWitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWWitch.swift; path = Characters/WWWitch.swift; sourceTree = "<group>"; };
+		66E7B1E71E228C1F00A4B8BD /* WWSeer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWSeer.swift; path = Characters/WWSeer.swift; sourceTree = "<group>"; };
+		66E7B1EA1E228E1D00A4B8BD /* WWWerewolf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWWerewolf.swift; path = Characters/WWWerewolf.swift; sourceTree = "<group>"; };
+		66E7B1EC1E228E5500A4B8BD /* WWMinion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWMinion.swift; path = Characters/WWMinion.swift; sourceTree = "<group>"; };
+		66E7B1F51E22C08A00A4B8BD /* DictionaryMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryMap.swift; path = Extensions/DictionaryMap.swift; sourceTree = "<group>"; };
 		66EAEE901E2195FA0075E277 /* WWCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWCharacter.swift; path = Characters/WWCharacter.swift; sourceTree = "<group>"; };
 		66EAEE931E21984B0075E277 /* WWAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWAction.swift; path = Actions/WWAction.swift; sourceTree = "<group>"; };
 		66EAEE961E2198C20075E277 /* WWState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWState.swift; path = Logic/WWState.swift; sourceTree = "<group>"; };
@@ -59,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				6647C4F61E21938900650FFF /* WerewolfFramework.h */,
+				66E7B1F41E22C07600A4B8BD /* Extensions */,
 				66EAEE951E2198A30075E277 /* Logic */,
 				66EAEE921E21983D0075E277 /* Actions */,
 				66EAEE8F1E21957E0075E277 /* Characters */,
@@ -67,10 +80,23 @@
 			path = WerewolfFramework;
 			sourceTree = "<group>";
 		};
+		66E7B1F41E22C07600A4B8BD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				66E7B1F51E22C08A00A4B8BD /* DictionaryMap.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		66EAEE8F1E21957E0075E277 /* Characters */ = {
 			isa = PBXGroup;
 			children = (
 				66EAEE901E2195FA0075E277 /* WWCharacter.swift */,
+				66E7B1E31E228B6D00A4B8BD /* WWTroublemaker.swift */,
+				66E7B1E51E228BF600A4B8BD /* WWWitch.swift */,
+				66E7B1E71E228C1F00A4B8BD /* WWSeer.swift */,
+				66E7B1EA1E228E1D00A4B8BD /* WWWerewolf.swift */,
+				66E7B1EC1E228E5500A4B8BD /* WWMinion.swift */,
 			);
 			name = Characters;
 			sourceTree = "<group>";
@@ -176,10 +202,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				66EAEE991E21AB2F0075E277 /* WWPlayer.swift in Sources */,
+				66E7B1ED1E228E5500A4B8BD /* WWMinion.swift in Sources */,
 				66EAEE971E2198C20075E277 /* WWState.swift in Sources */,
 				66EAEE911E2195FA0075E277 /* WWCharacter.swift in Sources */,
 				66E7B1D41E22874F00A4B8BD /* WWActionData.swift in Sources */,
+				66E7B1E41E228B6D00A4B8BD /* WWTroublemaker.swift in Sources */,
+				66E7B1F61E22C08A00A4B8BD /* DictionaryMap.swift in Sources */,
+				66E7B1E61E228BF600A4B8BD /* WWWitch.swift in Sources */,
+				66E7B1E81E228C1F00A4B8BD /* WWSeer.swift in Sources */,
 				66EAEE941E21984B0075E277 /* WWAction.swift in Sources */,
+				66E7B1EB1E228E1D00A4B8BD /* WWWerewolf.swift in Sources */,
 				66EAEE9B1E21AFAC0075E277 /* WWGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

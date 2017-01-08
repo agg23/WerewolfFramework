@@ -8,21 +8,21 @@
 
 import Foundation
 
-class WWCharacter: Equatable {
+public class WWCharacter: Equatable {
 	
-	enum TurnOrder {
+	public enum TurnOrder {
 		case concurrent
 		case last
 		case inactive
 	}
 	
-	var name: String
-	var image: UIImage?
-	var turnOrder: TurnOrder
+	public var name: String
+	public var image: UIImage?
+	public var turnOrder: TurnOrder
 	
-	var instructions: String
+	public var instructions: String
 	
-	init() {
+	public init() {
 		self.name = "Default Character"
 		self.turnOrder = .inactive
 		self.instructions = "Default character instructions (PLEASE REPLACE)"
@@ -31,11 +31,11 @@ class WWCharacter: Equatable {
 	/**
 		Interprets the provided WWAction (typically created from the GUI) and mutates the WWState
 	*/
-	func perform(action: WWAction, with state: WWState) {
+	public func perform(action: WWAction, with state: WWState) {
 		print("[WARNING] Default action performed. Nothing was changed")
 	}
 	
-	static func ==(lhs: WWCharacter, rhs: WWCharacter) -> Bool {
+	public static func ==(lhs: WWCharacter, rhs: WWCharacter) -> Bool {
 		return lhs.turnOrder == rhs.turnOrder && lhs.name == rhs.name
 	}
 }

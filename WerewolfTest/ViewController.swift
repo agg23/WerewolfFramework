@@ -15,6 +15,10 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		MultipeerCommunication.shared.viewController = self
+		
+		let gameController = GameController()
+		MultipeerCommunication.shared.delegate = gameController
+		gameController.newGame(name: "Test Game")
 	}
 
 	override func didReceiveMemoryWarning() {

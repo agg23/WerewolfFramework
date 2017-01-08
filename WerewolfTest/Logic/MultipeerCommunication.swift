@@ -36,7 +36,9 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 	private var browserViewController: MCBrowserViewController?
 	
 	private var host: MCPeerID?
-	private var isHost: Bool
+	var isHost: Bool
+	
+	var delegate: MCDelegate?
 	
 	override init() {
 		self.displayName = UIDevice.current.name
@@ -105,9 +107,11 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 	// MARK: MCSessionDelegate -
 	
 	func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-		DispatchQueue.main.async {
-			NotificationCenter.default.post(name: .MessageReceived, object: data)
-		}
+//		DispatchQueue.main.async {
+//			NotificationCenter.default.post(name: .MessageReceived, object: data)
+//		}
+		
+		self.delegate?.messageReceived(data: data, from: peerID.displayName)
 		
 		if let string = String(data: data, encoding: .utf8) {
 			print("Received message: " + string)
@@ -128,7 +132,7 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 			self.host = peerID
 			
 			DispatchQueue.main.async {
-				NotificationCenter.default.post(name: .DeviceConnected, object: nil)
+				NotificationCenter.default.post(name: .DeviceConnected, object: peerID.displayName)
 			}
 		} else if state == .notConnected {
 			if session.connectedPeers.count == 0 {
@@ -136,7 +140,7 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 			}
 			
 			DispatchQueue.main.async {
-				NotificationCenter.default.post(name: .DeviceDisconnected, object: nil)
+				NotificationCenter.default.post(name: .DeviceDisconnected, object: peerID.displayName)
 			}
 		}
 	}

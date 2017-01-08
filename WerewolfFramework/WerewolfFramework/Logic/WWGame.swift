@@ -9,17 +9,17 @@
 import Foundation
 import GameplayKit
 
-class WWGame {
-	var name: String
+public class WWGame {
+	public var name: String
 	
-	var state: WWState?
+	public var state: WWState?
 	
-	var players: [WWPlayer]
-	var nonHumanPlayers: [WWPlayer]
+	public var players: [WWPlayer]
+	public var nonHumanPlayers: [WWPlayer]
 	
-	var characters: [WWCharacter]
+	public var characters: [WWCharacter]
 	
-	init(name: String) {
+	public init(name: String) {
 		self.name = name
 		
 		self.players = Array()
@@ -28,7 +28,7 @@ class WWGame {
 		self.characters = Array()
 	}
 	
-	func generateRound() {
+	public func generateRound() {
 		if self.characters.count != self.players.count + self.nonHumanPlayers.count {
 			print("[ERROR] Cannot generate round when the number of characters and players does not equal")
 		}
@@ -54,7 +54,7 @@ class WWGame {
 		self.state = WWState(players: self.players + self.nonHumanPlayers, assignments: assignments)
 	}
 	
-	func registerPlayer(name: String, internalIdentifier: String) {
+	public func registerPlayer(name: String, internalIdentifier: String) {
 		let player = WWPlayer(name: name, internalIdentifier: internalIdentifier, human: true)
 		
 		for player in self.players {
@@ -66,7 +66,7 @@ class WWGame {
 		self.players.append(player)
 	}
 	
-	func removePlayer(name: String) {
+	public func removePlayer(name: String) {
 		for i in 0 ..< self.players.count {
 			if self.players[i].name == name {
 				self.players.remove(at: i)
@@ -75,7 +75,7 @@ class WWGame {
 		}
 	}
 	
-	func registerNonHumanPlayers(count: Int) {
+	public func registerNonHumanPlayers(count: Int) {
 		if self.nonHumanPlayers.count == count {
 			return
 		}
@@ -86,11 +86,11 @@ class WWGame {
 		}
 	}
 	
-	func register(character: WWCharacter) {
+	public func register(character: WWCharacter) {
 		self.characters.append(character)
 	}
 	
-	func remove(character: WWCharacter) {
+	public func remove(character: WWCharacter) {
 		for i in 0 ..< self.characters.count {
 			if self.characters[i] == character {
 				self.characters.remove(at: i)

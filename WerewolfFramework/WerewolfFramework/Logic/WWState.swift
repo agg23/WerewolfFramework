@@ -8,9 +8,9 @@
 
 import Foundation
 
-class WWState {
-	var players: [WWPlayer]
-	var assignments: [WWPlayer: WWCharacter]
+public class WWState {
+	public var players: [WWPlayer]
+	public var assignments: [WWPlayer: WWCharacter]
 	
 	init(players: [WWPlayer], assignments: [WWPlayer: WWCharacter]) {
 		self.players = players
