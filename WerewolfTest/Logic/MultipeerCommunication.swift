@@ -23,7 +23,7 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		}
 	}
 	
-	private var localPeerID: MCPeerID
+	var localPeerID: MCPeerID
 	private var advertiser: MCNearbyServiceAdvertiser
 	private var browser: MCNearbyServiceBrowser
 	
@@ -113,6 +113,10 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		catch {
 			print("[ERROR] \(error)")
 		}
+	}
+	
+	func disconnect() {
+		self.session.disconnect()
 	}
 	
 	// MARK: MCSessionDelegate -

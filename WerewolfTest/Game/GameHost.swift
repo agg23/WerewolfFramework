@@ -63,13 +63,46 @@ class GameHost: GameController {
 		print(peerData === peer)
 	}
 	
+	// MARK: - Communication
+	
 	func send(data peerData: PeerData, to player: WWPlayer) {
 		let data = NSKeyedArchiver.archivedData(withRootObject: peerData)
 		
 		MultipeerCommunication.shared.send(message: data, to: player.internalIdentifier)
 	}
 	
-	// MARK: GameController -
+	func sendStatus(to player: WWPlayer) {
+		guard let state = self.game?.state else {
+			return
+		}
+		
+		let peerData = PeerData(state: state)
+		send(data: peerData, to: player)
+	}
+	
+	func actionUpdate(data: PeerData) {
+		
+	}
+	
+	private func registerName(data: PeerData, from sender: String) {
+		guard let name = data.registeredName else {
+			print("[ERROR] Received registername command, with no included name")
+			return
+		}
+		
+		for playerID in self.seenPlayerIDs {
+			if playerID == sender {
+				if let player = self.game?.registerPlayer(name: name, internalIdentifier: playerID) {
+					sendStatus(to: player)
+				}
+				return
+			}
+		}
+		
+		print("[WARNING] Could not find peer for which to register name")
+	}
+	
+	// MARK: - GameController
 	
 	func connected(device: String) {
 		self.seenPlayerIDs.append(device)
@@ -84,7 +117,7 @@ class GameHost: GameController {
 		}
 	}
 	
-	// MARK: MCDelegate -
+	// MARK: - MCDelegate
 	
 	func messageReceived(data: Data, from sender: String) {
 		let any = NSKeyedUnarchiver.unarchiveObject(with: data)
@@ -95,5 +128,16 @@ class GameHost: GameController {
 		}
 		
 		print("Received PeerData from \(sender) with command \(peerData.command)")
+		
+		switch peerData.command {
+		case .actionupdate:
+			actionUpdate(data: peerData)
+		case .registername:
+			registerName(data: peerData, from: sender)
+		case .stateupdate:
+			print("[WARNING] Host should not receive stateupdate command")
+		default:
+			print("[WARNING] Unhandled command")
+		}
 	}
 }

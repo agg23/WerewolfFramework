@@ -54,16 +54,18 @@ public class WWGame {
 		self.state = WWState(players: self.players + self.nonHumanPlayers, assignments: assignments)
 	}
 	
-	public func registerPlayer(name: String, internalIdentifier: String) {
+	public func registerPlayer(name: String, internalIdentifier: String) -> WWPlayer? {
 		let player = WWPlayer(name: name, internalIdentifier: internalIdentifier, human: true)
 		
 		for player in self.players {
 			if player.name == name {
-				return
+				return nil
 			}
 		}
 		
 		self.players.append(player)
+		
+		return player
 	}
 	
 	public func removePlayer(name: String) {
