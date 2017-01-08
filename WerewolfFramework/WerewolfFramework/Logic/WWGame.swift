@@ -92,7 +92,7 @@ class WWGame {
 	
 	func remove(character: WWCharacter) {
 		for i in 0 ..< self.characters.count {
-			if self.characters[i] === character {
+			if self.characters[i] == character {
 				self.characters.remove(at: i)
 				return
 			}

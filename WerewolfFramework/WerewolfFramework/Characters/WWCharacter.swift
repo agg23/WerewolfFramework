@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WWCharacter {
+class WWCharacter: Equatable {
 	
 	enum TurnOrder {
 		case concurrent
@@ -33,5 +33,9 @@ class WWCharacter {
 	*/
 	func perform(action: WWAction, with state: WWState) {
 		print("[WARNING] Default action performed. Nothing was changed")
+	}
+	
+	static func ==(lhs: WWCharacter, rhs: WWCharacter) -> Bool {
+		return lhs.turnOrder == rhs.turnOrder && lhs.name == rhs.name
 	}
 }

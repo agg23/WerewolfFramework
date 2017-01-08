@@ -28,7 +28,7 @@ class WWPlayer: Hashable {
 	}
 	
 	static func ==(lhs: WWPlayer, rhs: WWPlayer) -> Bool {
-		return lhs === rhs
+		return lhs.name == rhs.name && lhs.internalIdentifier == rhs.internalIdentifier
 	}
 
 }

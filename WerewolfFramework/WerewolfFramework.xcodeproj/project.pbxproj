@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6647C4F81E21938900650FFF /* WerewolfFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6647C4F61E21938900650FFF /* WerewolfFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		66E7B1D41E22874F00A4B8BD /* WWActionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1D31E22874F00A4B8BD /* WWActionData.swift */; };
 		66EAEE911E2195FA0075E277 /* WWCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE901E2195FA0075E277 /* WWCharacter.swift */; };
 		66EAEE941E21984B0075E277 /* WWAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE931E21984B0075E277 /* WWAction.swift */; };
 		66EAEE971E2198C20075E277 /* WWState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE961E2198C20075E277 /* WWState.swift */; };
@@ -19,6 +20,7 @@
 		6647C4F31E21938900650FFF /* WerewolfFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WerewolfFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6647C4F61E21938900650FFF /* WerewolfFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WerewolfFramework.h; sourceTree = "<group>"; };
 		6647C4F71E21938900650FFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66E7B1D31E22874F00A4B8BD /* WWActionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWActionData.swift; path = Actions/WWActionData.swift; sourceTree = "<group>"; };
 		66EAEE901E2195FA0075E277 /* WWCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWCharacter.swift; path = Characters/WWCharacter.swift; sourceTree = "<group>"; };
 		66EAEE931E21984B0075E277 /* WWAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWAction.swift; path = Actions/WWAction.swift; sourceTree = "<group>"; };
 		66EAEE961E2198C20075E277 /* WWState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWState.swift; path = Logic/WWState.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				66EAEE931E21984B0075E277 /* WWAction.swift */,
+				66E7B1D31E22874F00A4B8BD /* WWActionData.swift */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				66EAEE991E21AB2F0075E277 /* WWPlayer.swift in Sources */,
 				66EAEE971E2198C20075E277 /* WWState.swift in Sources */,
 				66EAEE911E2195FA0075E277 /* WWCharacter.swift in Sources */,
+				66E7B1D41E22874F00A4B8BD /* WWActionData.swift in Sources */,
 				66EAEE941E21984B0075E277 /* WWAction.swift in Sources */,
 				66EAEE9B1E21AFAC0075E277 /* WWGame.swift in Sources */,
 			);
