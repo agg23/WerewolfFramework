@@ -17,7 +17,15 @@ public class WWGame {
 	public var players: [WWPlayer]
 	public var nonHumanPlayers: [WWPlayer]
 	
+	public var allPlayers: [WWPlayer] {
+		return self.players + self.nonHumanPlayers
+	}
+	
 	public var characters: [WWCharacter]
+	
+	public var nightCanEnd: Bool
+	
+	private var actions: [WWAction]
 	
 	public init(name: String) {
 		self.name = name
@@ -26,6 +34,10 @@ public class WWGame {
 		self.nonHumanPlayers = [WWPlayer]()
 		
 		self.characters = [WWCharacter]()
+		
+		self.nightCanEnd = false
+		
+		self.actions = [WWAction]()
 	}
 	
 	public func resetGame() {
@@ -49,7 +61,8 @@ public class WWGame {
 			assignments[i] = character
 		}
 		
-		self.state = WWState(players: self.players + self.nonHumanPlayers, assignments: assignments)
+		self.state = WWState(players: self.allPlayers, assignments: assignments)
+		self.actions = [WWAction]()
 	}
 	
 	public func clearState() {
@@ -75,6 +88,48 @@ public class WWGame {
 		
 		for character in self.characters {
 			character.beginNight(with: state)
+		}
+	}
+	
+	public func startDiscussion() {
+		guard let state = self.state else {
+			print("[ERROR] Cannot start discussion. No state exists")
+			return
+		}
+		
+		state.status = .discussion
+		
+		for action in self.actions {
+			if action.ordering.count < 1 {
+				print("[ERROR] Attempting to process WWAction with no ordering")
+				continue
+			}
+			
+			let index = action.ordering[action.ordering.count - 1]
+			let lastCharacter = self.characters[index]
+			lastCharacter.perform(action: action, with: state)
+		}
+	}
+	
+	public func endGame() {
+		self.state?.status = .nogame
+	}
+	
+	// MARK: - Communication
+	
+	public func add(action: WWAction) {
+		// TODO: Call to WWCharacter to check if some more input is needed from the client
+		
+		if self.actions.contains(where: { (innerAction) -> Bool in
+			action.ordering[0] == innerAction.ordering[0]
+		}) {
+			print("[ERROR] Attempted to add WWAction to game with already existing starting character")
+		}
+		
+		self.actions.append(action)
+		
+		if self.actions.count == self.players.count {
+			self.nightCanEnd = true
 		}
 	}
 	

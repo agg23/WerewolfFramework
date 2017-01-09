@@ -68,6 +68,18 @@ class GameHost: GameController {
 		sendAllStatus()
 	}
 	
+	func startDiscussion() {
+		self.game.startDiscussion()
+		
+		sendAllStatus()
+	}
+	
+	func endGame() {
+		self.game.endGame()
+		
+		sendAllStatus()
+	}
+	
 	func cancelGame() {
 		self.game.clearState()
 		
@@ -125,7 +137,25 @@ class GameHost: GameController {
 	}
 	
 	func actionUpdate(data: PeerData) {
+		guard let action = data.action else {
+			print("[ERROR] Received actionupdate command, with no included action")
+			return
+		}
 		
+		print("Received actionupdate")
+		
+		self.game.add(action: action)
+		
+		if self.game.nightCanEnd {
+			startDiscussion()
+			
+			// TODO: Should have confirmation, but instead jumps straight to ending the game
+			DispatchQueue.main.async {
+				Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (timer) in
+					self.endGame()
+				}
+			}
+		}
 	}
 	
 	private func registerName(data: PeerData, from sender: String) {

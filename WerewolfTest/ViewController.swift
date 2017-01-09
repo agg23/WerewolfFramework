@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WerewolfFramework
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	@IBOutlet weak var textField: UITextField!
@@ -46,6 +47,44 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		}
 		
 		MultipeerCommunication.shared.startAdvertising()
+	}
+	
+	@IBAction func confirmActionPressed(_ sender: Any) {
+		guard let state = self.client?.state, let character = self.client?.character else {
+			return
+		}
+		
+		let selectedCount = self.tableView.indexPathsForSelectedRows?.count ?? 0
+		
+		if selectedCount != character.interactionCount {
+			let alert = UIAlertController(title: "Alert", message: "\(character.name) requires \(character.interactionCount) selected cards", preferredStyle: .alert)
+			present(alert, animated: true, completion: nil)
+			return
+		}
+		
+		guard let playerIndex = state.players.index(where: { (player) -> Bool in
+			return player == self.client?.player
+		}) else {
+			return
+		}
+		
+		let ordering: [Int] = [playerIndex]
+		var delta: [Int: WWActionData]
+		
+		switch selectedCount {
+		case 0:
+			delta = [playerIndex: WWActionData(first: nil, second: nil)]
+		case 1:
+			delta = [playerIndex: WWActionData(first: self.tableView.indexPathsForSelectedRows?[0].row, second: nil)]
+		case 2:
+			delta = [playerIndex: WWActionData(first: self.tableView.indexPathsForSelectedRows?[0].row, second: self.tableView.indexPathsForSelectedRows?[1].row)]
+		default:
+			delta = [Int: WWActionData]()
+		}
+		
+		let action = WWAction(ordering: ordering, delta: delta)
+		let peerData = PeerData(action: action)
+		self.client?.send(data: peerData)
 	}
 	
 	@IBAction func hostPressed(_ sender: Any) {
@@ -113,7 +152,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			if let character = self.client!.character {
 				string += " (\(character.name))"
 			}
-		} else {
+		} else if state.status != .nogame {
 			guard let playerCharacter = self.client!.character, let character = state.playerAssignments[player] else {
 				return UITableViewCell()
 			}
@@ -133,6 +172,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 					string += " (\(character.name))"
 				}
 			}
+		} else {
+			guard let character = state.playerAssignments[player] else {
+				return UITableViewCell()
+			}
+			
+			string += " (\(character.name))"
 		}
 
 		cell.textLabel?.text = state.players[indexPath.row].name + string
@@ -141,11 +186,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	}
 	
 	func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-		guard let state = self.client?.state else {
-			return nil
-		}
-		
-		guard let character = self.client?.character else {
+		guard let state = self.client?.state, let character = self.client?.character else {
 			return nil
 		}
 		

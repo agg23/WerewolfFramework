@@ -9,17 +9,17 @@
 import Foundation
 
 public class WWAction: NSObject, NSCoding {
-	public enum Operation: Int {
-		case peek
-		case swap
-		case inherit
-	}
+	/**
+		Maps to the index of the character in the WWState characters array
+	*/
+	public let ordering: [Int]
 	
-	public let ordering: [Operation]
+	/**
+		Maps from index of the character in the WWState characters array to WWActionData representing the selected players
+	*/
+	public let delta: [Int: WWActionData]
 	
-	public let delta: [Operation: WWActionData]
-	
-	public init(ordering: [Operation], delta: [Operation: WWActionData]) {
+	public init(ordering: [Int], delta: [Int: WWActionData]) {
 		self.ordering = ordering
 		self.delta = delta
 	}
@@ -27,28 +27,24 @@ public class WWAction: NSObject, NSCoding {
 	// MARK: NSCoding -
 	
 	public func encode(with coder: NSCoder) {
-		let ordering: [Int] = self.ordering.map{$0.rawValue}
+		coder.encode(self.ordering, forKey: "ordering")
 		
-		coder.encode(ordering, forKey: "ordering")
-		
-		let delta: [Int: WWActionData] = self.delta.map{(key, value) in (key.rawValue, value)}
-		
-		coder.encode(delta, forKey: "delta")
+		coder.encode(self.delta, forKey: "delta")
 	}
 	
 	public required init?(coder decoder: NSCoder) {
-		guard let orderingInt = decoder.decodeObject(forKey: "ordering") as? [Int] else {
+		guard let ordering = decoder.decodeObject(forKey: "ordering") as? [Int] else {
 			print("[ERROR] Cannot decode ordering")
 			return nil
 		}
 		
-		self.ordering = orderingInt.map{Operation(rawValue: $0) ?? .peek}
+		self.ordering = ordering
 		
 		guard let delta = decoder.decodeObject(forKey: "delta") as? [Int: WWActionData] else {
 			print("[ERROR] Cannot decode delta")
 			return nil
 		}
 		
-		self.delta = delta.map{(key, value) in (Operation(rawValue: key) ?? .peek, value)}
+		self.delta = delta
 	}
 }

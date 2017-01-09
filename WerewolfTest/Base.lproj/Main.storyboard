@@ -82,6 +82,9 @@
                                 <rect key="frame" x="136" y="480" width="103" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Confirm Action"/>
+                                <connections>
+                                    <action selector="confirmActionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ql3-Se-v00"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Char Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eam-si-I5M">
                                 <rect key="frame" x="212" y="149" width="147" height="21"/>

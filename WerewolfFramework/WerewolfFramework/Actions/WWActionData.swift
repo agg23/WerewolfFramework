@@ -9,34 +9,52 @@
 import Foundation
 
 public class WWActionData: NSObject, NSCoding {
-	public let firstInteraction: WWPlayer
-	public let secondInteraction: WWPlayer
+	/**
+		Maps to the index of the first selected player in the WWGame allPlayers array
+	*/
+	public let firstSelection: Int?
 	
-	public init(first: WWPlayer, second: WWPlayer) {
-		self.firstInteraction = first
-		self.secondInteraction = second
+	/**
+		Maps to the index of the second selected player in the WWGame allPlayers array
+	*/
+	public let secondSelection: Int?
+	
+	public init(first: Int?, second: Int?) {
+		self.firstSelection = first
+		self.secondSelection = second
 	}
 	
 	// MARK: NSCoding -
 	
 	public func encode(with coder: NSCoder) {
-		coder.encode(self.firstInteraction, forKey: "first")
-		coder.encode(self.secondInteraction, forKey: "second")
+		if self.firstSelection == nil {
+			coder.encode(-1, forKey: "first")
+		} else {
+			coder.encode(self.firstSelection!, forKey: "first")
+		}
+		
+		if self.secondSelection == nil {
+			coder.encode(-1, forKey: "second")
+		} else {
+			coder.encode(self.secondSelection!, forKey: "second")
+		}
 	}
 	
 	public required init?(coder decoder: NSCoder) {
-		guard let first = decoder.decodeObject(forKey: "first") as? WWPlayer else {
-			print("[ERROR] Cannot decode first WWPlayer")
-			return nil
+		let first = decoder.decodeInteger(forKey: "first")
+		
+		if first == -1 {
+			self.firstSelection = nil
+		} else {
+			self.firstSelection = first
 		}
 		
-		self.firstInteraction = first
+		let second = decoder.decodeInteger(forKey: "second")
 		
-		guard let second = decoder.decodeObject(forKey: "second") as? WWPlayer else {
-			print("[ERROR] Cannot decode second WWPlayer")
-			return nil
+		if second == -1 {
+			self.secondSelection = nil
+		} else {
+			self.secondSelection = second
 		}
-		
-		self.secondInteraction = second
 	}
 }
