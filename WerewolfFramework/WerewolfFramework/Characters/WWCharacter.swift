@@ -51,6 +51,13 @@ public class WWCharacter: NSObject, NSCoding {
 		print("[WARNING] Default action performed. Nothing was changed")
 	}
 	
+	/**
+		Performs any changes dictated by the current WWState, such as a solo Werewolf adding a selectable
+	*/
+	public func beginNight(with state: WWState) {
+		
+	}
+	
 	public func selectable(player: WWPlayer) -> Bool {
 		return viewable(player: player, viewable: self.selectable)
 	}

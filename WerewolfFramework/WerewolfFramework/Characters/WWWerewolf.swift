@@ -10,7 +10,7 @@ import Foundation
 
 public class WWWerewolf: WWCharacter {
 	public init() {
-		super.init(name: "Werewolf", instructions: "I am a Werewolf", turnOrder: .concurrent, selectable: .none, interactionCount: 0, defaultVisible: [WWWerewolf.self], defaultViewable: .humanOnly)
+		super.init(name: "Werewolf", instructions: "I am a Werewolf", turnOrder: .concurrent, selectable: .nonHumanOnly, interactionCount: 0, defaultVisible: [WWWerewolf.self], defaultViewable: .humanOnly)
 	}
 	
 	public required init?(coder decoder: NSCoder) {
@@ -19,5 +19,26 @@ public class WWWerewolf: WWCharacter {
 	
 	override public func perform(action: WWAction, with state: WWState) {
 		print("Overridden Werewolf action!")
+	}
+	
+	public override func beginNight(with state: WWState) {
+		var werewolfCount = 0
+		
+		for player in state.players {
+			if !player.isHumanPlayer {
+				continue
+			}
+			
+			let character = state.playerAssignments[player]
+			if character is WWWerewolf {
+				werewolfCount += 1
+			}
+		}
+		
+		if werewolfCount == 1 {
+			self.interactionCount = 1
+		} else {
+			self.interactionCount = 0
+		}
 	}
 }

@@ -53,8 +53,32 @@ public class WWGame {
 	}
 	
 	public func clearState() {
+		self.state?.status = .nogame
+	}
+	
+	public func cancelGame() {
 		self.state = nil
 	}
+	
+	public func startNight() {
+		guard let state = self.state else {
+			print("[ERROR] Cannot start night. No state exists")
+			return
+		}
+		
+		if state.status == .night {
+			print("[WARNING] Attempting to start night when night is current status")
+			return
+		}
+		
+		state.status = .night
+		
+		for character in self.characters {
+			character.beginNight(with: state)
+		}
+	}
+	
+	// MARK: - Player/Character Management
 	
 	public func registerPlayer(name: String, internalIdentifier: String) -> WWPlayer? {
 		let player = WWPlayer(name: name, internalIdentifier: internalIdentifier, human: true)

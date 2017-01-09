@@ -63,17 +63,17 @@ class GameHost: GameController {
 	}
 	
 	func startNight() {
-		self.game.state?.status = .night
+		self.game.startNight()
 		
 		sendAllStatus()
 	}
 	
 	func cancelGame() {
-		self.game.state?.status = .nogame
-		
 		self.game.clearState()
 		
 		sendAllStatus()
+		
+		self.game.cancelGame()
 	}
 	
 	// MARK: - Host Player
