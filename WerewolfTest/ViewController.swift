@@ -118,20 +118,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 				return UITableViewCell()
 			}
 			
-			
-			var contains = false
-			for characterType in playerCharacter.defaultVisible {
-//				let test = type(of: character) is characterType
-				let type: Any.Type = Mirror(reflecting: character).subjectType
-				
-				if characterType == type {
-					contains = true
-					break
+			if playerCharacter.defaultViewable(player: player) {
+				var contains = false
+				for characterType in playerCharacter.defaultVisible {
+					let type: Any.Type = Mirror(reflecting: character).subjectType
+					
+					if characterType == type {
+						contains = true
+						break
+					}
 				}
-			}
-			
-			if contains {
-				string += " (\(character.name))"
+				
+				if contains {
+					string += " (\(character.name))"
+				}
 			}
 		}
 
