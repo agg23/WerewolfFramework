@@ -31,7 +31,7 @@ class GameClient: GameController {
 		}
 		
 		for player in state.players {
-			if (self.gameHost != nil && player.internalIdentifier == "host") || player.name == MultipeerCommunication.shared.localPeerID.displayName {
+			if (self.gameHost != nil && player.internalIdentifier == "host") || player.internalIdentifier == MultipeerCommunication.shared.localPeerID.displayName {
 				self.player = player
 				break
 			}

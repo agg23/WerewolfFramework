@@ -19,6 +19,8 @@ public class WWGame {
 	
 	public var characters: [WWCharacter]
 	
+	public var inProgress: Bool
+	
 	public init(name: String) {
 		self.name = name
 		
@@ -26,6 +28,8 @@ public class WWGame {
 		self.nonHumanPlayers = Array()
 		
 		self.characters = Array()
+		
+		self.inProgress = false
 	}
 	
 	public func generateRound() {
@@ -60,9 +64,9 @@ public class WWGame {
 		return player
 	}
 	
-	public func removePlayer(name: String) {
+	public func removePlayer(id: String) {
 		for i in 0 ..< self.players.count {
-			if self.players[i].name == name {
+			if self.players[i].name == id {
 				self.players.remove(at: i)
 				return
 			}

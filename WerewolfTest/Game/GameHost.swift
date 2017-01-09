@@ -25,14 +25,12 @@ class GameHost: GameController {
 		self.seenPlayerIDs = Array()
 		
 		self.hostClient.gameHost = self
+		MultipeerCommunication.shared.delegate = self
 	}
 	
 	func newGame(name: String) {
 		self.game.name = name
 		
-//		self.game.registerPlayer(name: "Adam", internalIdentifier: "AdamID")
-//		self.game.registerPlayer(name: "Anna", internalIdentifier: "AnnaID")
-//		self.game.registerPlayer(name: "Christopher", internalIdentifier: "Christopher")
 		self.game.registerNonHumanPlayers(count: 3)
 		
 		let characters = [WWWerewolf(), WWWerewolf(), WWTroublemaker(), WWWitch(), WWSeer(), WWMinion()]
@@ -42,6 +40,8 @@ class GameHost: GameController {
 		}
 		
 		self.game.generateRound()
+		
+		self.game.inProgress = true
 		
 		guard let currentState = self.game.state else {
 			print("[ERROR] Invalid state")
@@ -59,7 +59,10 @@ class GameHost: GameController {
 		
 		// Send to host's client
 		sendToHost(data: data)
-		sendToHost(data: data)
+	}
+	
+	func cancelGame() {
+		self.game.inProgress = false
 	}
 	
 	// MARK: - Host Player
@@ -127,6 +130,17 @@ class GameHost: GameController {
 			if self.seenPlayerIDs[i] == device {
 				self.seenPlayerIDs.remove(at: i)
 				return
+			}
+		}
+		
+		for player in self.game.players {
+			if player.internalIdentifier == device {
+				self.game.removePlayer(id: device)
+				
+				if self.game.inProgress {
+					print("Canceling game. User with device \(device) disconnected")
+					cancelGame()
+				}
 			}
 		}
 	}
