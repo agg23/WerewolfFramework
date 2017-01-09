@@ -24,7 +24,7 @@ public class WWPlayer: NSObject, NSCoding, NSCopying {
 	// MARK: Hashable -
 	
 	override public var hashValue: Int {
-		return self.name.hashValue + self.internalIdentifier.hashValue
+		return self.internalIdentifier.hashValue
 	}
 	
 	public static func ==(lhs: WWPlayer, rhs: WWPlayer) -> Bool {

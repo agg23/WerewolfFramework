@@ -77,7 +77,7 @@ class GameClient: GameController {
 	
 	func connected(device: String) {
 		// Newly connected, so send device name to host
-		let data = PeerData(name: "Test Device Name")
+		let data = PeerData(name: self.name)
 		self.send(data: data)
 	}
 	

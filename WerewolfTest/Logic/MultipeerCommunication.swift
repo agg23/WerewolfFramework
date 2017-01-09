@@ -145,7 +145,9 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		
 		DispatchQueue.main.async {
 			if state == .connected {
-				if !self.isHost {
+				if !self.isHost && self.host == nil {
+					// Only set host if this is not the host and the host isn't already set
+					print("Set host to \(peerID.displayName)")
 					self.host = peerID
 				}
 				

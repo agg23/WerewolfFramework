@@ -31,6 +31,8 @@ class GameHost: GameController {
 	func newGame(name: String) {
 		self.game.name = name
 		
+		self.game.resetGame()
+		
 		self.game.registerNonHumanPlayers(count: 3)
 		
 		let characters = [WWWerewolf(), WWWerewolf(), WWTroublemaker(), WWWitch(), WWSeer(), WWMinion()]

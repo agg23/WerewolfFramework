@@ -22,10 +22,16 @@ public class WWGame {
 	public init(name: String) {
 		self.name = name
 		
-		self.players = Array()
-		self.nonHumanPlayers = Array()
+		self.players = [WWPlayer]()
+		self.nonHumanPlayers = [WWPlayer]()
 		
-		self.characters = Array()
+		self.characters = [WWCharacter]()
+	}
+	
+	public func resetGame() {
+		self.nonHumanPlayers = [WWPlayer]()
+		
+		self.characters = [WWCharacter]()
 	}
 	
 	public func generateRound() {
