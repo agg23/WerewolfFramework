@@ -9,8 +9,10 @@
 import Foundation
 
 public extension Notification.Name {
-	static let DeviceConnected = Notification.Name("DeviceConnected")
-	static let DeviceDisconnected = Notification.Name("DeviceDisconnected")
+	static let deviceConnected = Notification.Name("deviceConnected")
+	static let deviceDisconnected = Notification.Name("deviceDisconnected")
 	
-	static let MessageReceived = Notification.Name("MessageReceived")
+	static let messageReceived = Notification.Name("messageReceived")
+	
+	static let stateUpdate = Notification.Name("stateUpdate")
 }

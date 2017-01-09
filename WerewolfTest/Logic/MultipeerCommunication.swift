@@ -149,14 +149,14 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 					self.host = peerID
 				}
 				
-				NotificationCenter.default.post(name: .DeviceConnected, object: peerID.displayName)
+				NotificationCenter.default.post(name: .deviceConnected, object: peerID.displayName)
 				self.delegate?.connected(device: peerID.displayName)
 			} else if state == .notConnected {
 				if session.connectedPeers.count == 0 {
 					self.isHost = false
 				}
 				
-				NotificationCenter.default.post(name: .DeviceDisconnected, object: peerID.displayName)
+				NotificationCenter.default.post(name: .deviceDisconnected, object: peerID.displayName)
 				self.delegate?.disconnected(device: peerID.displayName)
 			}
 		}

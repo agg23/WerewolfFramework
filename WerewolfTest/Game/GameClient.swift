@@ -15,6 +15,7 @@ class GameClient: GameController {
 	
 	var state: WWState?
 	var player: WWPlayer?
+	var character: WWCharacter?
 	
 	weak var gameHost: GameHost?
 	
@@ -51,7 +52,13 @@ class GameClient: GameController {
 			return
 		}
 		
+		self.character = character
+		
 		print("Client was assigned the role of \(character.name)")
+		
+		DispatchQueue.main.async {
+			NotificationCenter.default.post(name: .stateUpdate, object: nil)
+		}
 	}
 	
 	func send(data peerData: PeerData) {
@@ -95,8 +102,6 @@ class GameClient: GameController {
 			print("[WARNING] Client should not receive registername command")
 		case .stateupdate:
 			stateUpdate(data: peerData)
-		default:
-			print("[WARNING] Unhandled command")
 		}
 	}
 }

@@ -9,12 +9,24 @@
 import Foundation
 
 public class WWState: NSObject, NSCoding {
+	
+	public enum GameStatus: Int {
+		case starting
+		case night
+		case discussion
+		case nogame
+	}
+	
 	public var players: [WWPlayer]
 	public var assignments: [Int: WWCharacter]
+	
+	public var status: GameStatus
 	
 	init(players: [WWPlayer], assignments: [Int: WWCharacter]) {
 		self.players = players
 		self.assignments = assignments
+		
+		self.status = .nogame
 	}
 	
 	public var playerAssignments: [WWPlayer: WWCharacter] {
@@ -33,6 +45,8 @@ public class WWState: NSObject, NSCoding {
 	public func encode(with coder: NSCoder) {
 		coder.encode(self.players, forKey: "players")
 		coder.encode(self.assignments, forKey: "assignments")
+		
+		coder.encode(self.status.rawValue, forKey: "status")
 	}
 	
 	public required init?(coder decoder: NSCoder) {
@@ -43,14 +57,13 @@ public class WWState: NSObject, NSCoding {
 		
 		self.players = players
 		
-		let assignmentTest = decoder.decodeObject(forKey: "assignments")
-		print(assignmentTest)
-		
-		guard let assignments = assignmentTest as? [Int: WWCharacter] else {
+		guard let assignments = decoder.decodeObject(forKey: "assignments") as? [Int: WWCharacter] else {
 			print("[ERROR] Cannot decode assignments")
 			return nil
 		}
 		
 		self.assignments = assignments
+		
+		self.status = GameStatus(rawValue: decoder.decodeInteger(forKey: "status")) ?? .nogame
 	}
 }

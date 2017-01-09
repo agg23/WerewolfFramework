@@ -8,8 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	@IBOutlet weak var textField: UITextField!
+	@IBOutlet weak var tableView: UITableView!
+	
+	@IBOutlet weak var gameStatusLabel: UILabel!
+	@IBOutlet weak var characterLabel: UILabel!
 	
 	var host: GameHost?
 	var client: GameClient?
@@ -17,6 +21,11 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
+		
+		NotificationCenter.default.addObserver(forName: .stateUpdate, object: nil, queue: nil) { (notification) in
+			self.statusUpdate()
+		}
+		
 		MultipeerCommunication.shared.viewController = self
 		
 		self.client = GameClient()
@@ -37,14 +46,6 @@ class ViewController: UIViewController {
 		MultipeerCommunication.shared.startAdvertising()
 	}
 	
-	@IBAction func sendMessageToAllPressed(_ sender: Any) {
-		MultipeerCommunication.shared.sendToAll(message: "Hello world".data(using: .utf8)!)
-	}
-	
-	@IBAction func sendMessageToHostPressed(_ sender: Any) {
-		MultipeerCommunication.shared.sendToHost(message: "Host only message".data(using: .utf8)!)
-	}
-	
 	@IBAction func hostPressed(_ sender: Any) {
 		MultipeerCommunication.shared.startBrowser()
 		
@@ -54,6 +55,70 @@ class ViewController: UIViewController {
 	@IBAction func startGamePressed(_ sender: Any) {
 		self.host?.registerHostPlayer(with: "Host Player")
 		self.host?.newGame(name: "Test Game Name")
+	}
+	
+	func statusUpdate() {
+		self.tableView.reloadData()
+		
+		guard let client = self.client else {
+			return
+		}
+		
+		guard let state = client.state else {
+			return
+		}
+		
+		switch state.status {
+		case .nogame:
+			self.gameStatusLabel.text = "No Active Game"
+		case .starting:
+			self.gameStatusLabel.text = "Game Starting"
+		case .night:
+			self.gameStatusLabel.text = "Night"
+		case .discussion:
+			self.gameStatusLabel.text = "Discussion"
+		}
+		
+		let character = client.character
+		
+		self.characterLabel.text = character?.name
+	}
+	
+	// MARK: - UITableViewDelegate
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		guard let state = self.client?.state else {
+			print("[WARNING] No state for table view")
+			return UITableViewCell()
+		}
+		
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+			// Should never occur
+			return UITableViewCell()
+		}
+		
+		var string = ""
+		if state.players[indexPath.row] == self.client!.player {
+			string = " - You"
+			
+			if let character = self.client!.character {
+				string += " (\(character.name))"
+			}
+		}
+
+		cell.textLabel?.text = state.players[indexPath.row].name + string
+		
+		return cell
+	}
+	
+	// MARK: - UITableViewDataSource
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if let client = self.client, let state = client.state {
+			return state.players.count
+		}
+		
+		return 0
 	}
 }
 

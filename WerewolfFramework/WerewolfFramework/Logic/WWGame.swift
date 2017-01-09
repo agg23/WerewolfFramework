@@ -19,8 +19,6 @@ public class WWGame {
 	
 	public var characters: [WWCharacter]
 	
-	public var inProgress: Bool
-	
 	public init(name: String) {
 		self.name = name
 		
@@ -28,8 +26,6 @@ public class WWGame {
 		self.nonHumanPlayers = Array()
 		
 		self.characters = Array()
-		
-		self.inProgress = false
 	}
 	
 	public func generateRound() {
@@ -48,6 +44,10 @@ public class WWGame {
 		}
 		
 		self.state = WWState(players: self.players + self.nonHumanPlayers, assignments: assignments)
+	}
+	
+	public func clearState() {
+		self.state = nil
 	}
 	
 	public func registerPlayer(name: String, internalIdentifier: String) -> WWPlayer? {

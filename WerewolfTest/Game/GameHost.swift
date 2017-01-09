@@ -41,7 +41,7 @@ class GameHost: GameController {
 		
 		self.game.generateRound()
 		
-		self.game.inProgress = true
+		self.game.state?.status = .starting
 		
 		guard let currentState = self.game.state else {
 			print("[ERROR] Invalid state")
@@ -52,17 +52,26 @@ class GameHost: GameController {
 			print("Player \(player.name) was assigned character \(character.name)")
 		}
 		
-		let peerData = PeerData(state: currentState)
+		sendAllStatus()
 		
-		let data = NSKeyedArchiver.archivedData(withRootObject: peerData)
-		MultipeerCommunication.shared.sendToAll(message: data)
+		// TODO: Should have confirmation, but instead jumps straight to night
+		Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (timer) in
+			self.startNight()
+		}
+	}
+	
+	func startNight() {
+		self.game.state?.status = .night
 		
-		// Send to host's client
-		sendToHost(data: data)
+		sendAllStatus()
 	}
 	
 	func cancelGame() {
-		self.game.inProgress = false
+		self.game.state?.status = .nogame
+		
+		self.game.clearState()
+		
+		sendAllStatus()
 	}
 	
 	// MARK: - Host Player
@@ -88,6 +97,20 @@ class GameHost: GameController {
 		}
 		
 		MultipeerCommunication.shared.send(message: data, to: player.internalIdentifier)
+	}
+	
+	func sendAllStatus() {
+		guard let state = self.game.state else {
+			return
+		}
+		
+		let peerData = PeerData(state: state)
+		
+		let data = NSKeyedArchiver.archivedData(withRootObject: peerData)
+		MultipeerCommunication.shared.sendToAll(message: data)
+		
+		// Send to host's client
+		sendToHost(data: data)
 	}
 	
 	func sendStatus(to player: WWPlayer) {
@@ -129,7 +152,7 @@ class GameHost: GameController {
 		for i in 0 ..< self.seenPlayerIDs.count {
 			if self.seenPlayerIDs[i] == device {
 				self.seenPlayerIDs.remove(at: i)
-				return
+				break
 			}
 		}
 		
@@ -137,7 +160,7 @@ class GameHost: GameController {
 			if player.internalIdentifier == device {
 				self.game.removePlayer(id: device)
 				
-				if self.game.inProgress {
+				if self.game.state?.status != .nogame {
 					print("Canceling game. User with device \(device) disconnected")
 					cancelGame()
 				}
@@ -164,8 +187,6 @@ class GameHost: GameController {
 			registerName(data: peerData, from: sender)
 		case .stateupdate:
 			print("[WARNING] Host should not receive stateupdate command")
-		default:
-			print("[WARNING] Unhandled command")
 		}
 	}
 }
