@@ -10,7 +10,7 @@ import Foundation
 
 public class WWSeer: WWCharacter {
 	public init() {
-		super.init(name: "Seer", instructions: "I am a Seer", turnOrder: .concurrent)
+		super.init(name: "Seer", instructions: "I am a Seer", turnOrder: .concurrent, viewable: .nonHumanOnly, interactionCount: 2)
 	}
 	
 	public required init?(coder decoder: NSCoder) {

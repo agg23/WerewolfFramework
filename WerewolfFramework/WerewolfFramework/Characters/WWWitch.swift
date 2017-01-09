@@ -10,7 +10,7 @@ import Foundation
 
 public class WWWitch: WWCharacter {
 	public init() {
-		super.init(name: "Witch", instructions: "I am a Witch", turnOrder: .concurrent)
+		super.init(name: "Witch", instructions: "I am a Witch", turnOrder: .concurrent, viewable: .nonHumanOnly, interactionCount: 1)
 	}
 	
 	public required init?(coder decoder: NSCoder) {

@@ -17,6 +17,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	var host: GameHost?
 	var client: GameClient?
+	
+	var lastSelectedIndex: Int = 0
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -82,6 +84,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		let character = client.character
 		
 		self.characterLabel.text = character?.name
+		
+		if character?.interactionCount == 0 {
+			self.tableView.allowsSelection = false
+		} else {
+		self.tableView.allowsMultipleSelection = true
+		}
 	}
 	
 	// MARK: - UITableViewDelegate
@@ -109,6 +117,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		cell.textLabel?.text = state.players[indexPath.row].name + string
 		
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+		guard let state = self.client?.state else {
+			return nil
+		}
+		
+		guard let character = self.client?.character else {
+			return nil
+		}
+		
+		let player = state.players[indexPath.row]
+		
+		let selectedCount = (tableView.indexPathsForSelectedRows?.count ?? 0) + 1
+		
+		if character.interactionCount == 0 || !character.viewable(player: player) {
+			return nil
+		}
+		
+		if selectedCount > character.interactionCount {
+			tableView.deselectRow(at: IndexPath(row: self.lastSelectedIndex, section: 0), animated: false)
+		}
+		
+		return indexPath
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		self.lastSelectedIndex = indexPath.row
+	}
+	
+	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+		self.lastSelectedIndex = 0
 	}
 	
 	// MARK: - UITableViewDataSource

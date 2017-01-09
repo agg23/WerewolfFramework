@@ -10,7 +10,7 @@ import Foundation
 
 public class WWMinion: WWCharacter {
 	public init() {
-		super.init(name: "Minion", instructions: "I am a Minion", turnOrder: .concurrent)
+		super.init(name: "Minion", instructions: "I am a Minion", turnOrder: .concurrent, viewable: .none, interactionCount: 0)
 	}
 	
 	public required init?(coder decoder: NSCoder) {

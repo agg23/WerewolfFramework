@@ -10,7 +10,7 @@ import Foundation
 
 public class WWWerewolf: WWCharacter {
 	public init() {
-		super.init(name: "Werewolf", instructions: "I am a Werewolf", turnOrder: .concurrent)
+		super.init(name: "Werewolf", instructions: "I am a Werewolf", turnOrder: .concurrent, viewable: .none, interactionCount: 0)
 	}
 	
 	public required init?(coder decoder: NSCoder) {
