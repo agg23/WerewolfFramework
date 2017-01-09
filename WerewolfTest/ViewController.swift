@@ -106,10 +106,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		}
 		
 		var string = ""
-		if state.players[indexPath.row] == self.client!.player {
+		let player = state.players[indexPath.row]
+		if player == self.client!.player {
 			string = " - You"
 			
 			if let character = self.client!.character {
+				string += " (\(character.name))"
+			}
+		} else {
+			guard let playerCharacter = self.client!.character, let character = state.playerAssignments[player] else {
+				return UITableViewCell()
+			}
+			
+			
+			var contains = false
+			for characterType in playerCharacter.defaultVisible {
+//				let test = type(of: character) is characterType
+				let type: Any.Type = Mirror(reflecting: character).subjectType
+				
+				if characterType == type {
+					contains = true
+					break
+				}
+			}
+			
+			if contains {
 				string += " (\(character.name))"
 			}
 		}
@@ -132,7 +153,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		
 		let selectedCount = (tableView.indexPathsForSelectedRows?.count ?? 0) + 1
 		
-		if character.interactionCount == 0 || !character.viewable(player: player) {
+		if character.interactionCount == 0 || !character.selectable(player: player) {
 			return nil
 		}
 		
