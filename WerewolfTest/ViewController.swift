@@ -58,6 +58,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		
 		if selectedCount != character.interactionCount {
 			let alert = UIAlertController(title: "Alert", message: "\(character.name) requires \(character.interactionCount) selected cards", preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (uiAlertAction) in
+				alert.dismiss(animated: true, completion: nil)
+			}))
 			present(alert, animated: true, completion: nil)
 			return
 		}
