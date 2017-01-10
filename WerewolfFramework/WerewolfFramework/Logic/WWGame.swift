@@ -101,8 +101,22 @@ public class WWGame {
 		
 		let playerAssignments = state.playerAssignments
 		
-		for (player, action) in self.actions {
-			if action.actions.count < 1 {
+		// Build sorted players based on their characters
+		let sortedPlayers = playerAssignments.keys.sorted {
+			let char1 = playerAssignments[$0]
+			let char2 = playerAssignments[$1]
+			
+			return char1!.orderNumber < char2!.orderNumber
+		}
+		
+		for player in sortedPlayers {
+			let action = self.actions[player]
+			
+			if action == nil {
+				continue
+			}
+			
+			if action!.actions.count < 1 {
 				print("[ERROR] Attempting to process WWAction with no ordering")
 				continue
 			}
@@ -111,8 +125,8 @@ public class WWGame {
 				print("[ERROR] WWAction with invalid player")
 				continue
 			}
-			character.perform(action: action, with: state)
-		}
+			character.perform(action: action!, with: state)
+		}		
 	}
 	
 	public func endGame() {

@@ -25,7 +25,10 @@ public class WWCharacter: NSObject, NSCoding {
 	
 	public var name: String
 	public var image: UIImage?
+	
 	public var turnOrder: TurnOrder
+	public var orderNumber: Int = -1
+	
 	public var selectable: Viewable
 	public var interactionCount: Int
 	
@@ -34,9 +37,10 @@ public class WWCharacter: NSObject, NSCoding {
 	
 	public var instructions: String
 	
-	public init(name: String, instructions: String, turnOrder: TurnOrder, selectable: Viewable, interactionCount: Int, defaultVisible: [WWCharacter.Type], defaultViewable: Viewable) {
+	public init(name: String, instructions: String, turnOrder: TurnOrder, orderNumber: Int, selectable: Viewable, interactionCount: Int, defaultVisible: [WWCharacter.Type], defaultViewable: Viewable) {
 		self.name = name
 		self.turnOrder = turnOrder
+		self.orderNumber = orderNumber
 		self.instructions = instructions
 		self.selectable = selectable
 		self.interactionCount = interactionCount

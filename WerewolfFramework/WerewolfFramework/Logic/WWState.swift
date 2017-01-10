@@ -42,6 +42,14 @@ public class WWState: NSObject, NSCoding {
 		return playerAssignments
 	}
 	
+	public func player(at index: Int) -> WWPlayer? {
+		if index >= self.players.count {
+			return nil
+		}
+		
+		return self.players[index]
+	}
+	
 	// MARK: - NSCoding
 	
 	public func encode(with coder: NSCoder) {

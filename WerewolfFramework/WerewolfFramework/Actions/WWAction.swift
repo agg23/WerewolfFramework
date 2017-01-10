@@ -14,6 +14,14 @@ public class WWAction: NSObject, NSCoding {
 	*/
 	public let actions: [WWActionData]
 	
+	public var lastAction: WWActionData? {
+		if self.actions.count < 1 {
+			return nil
+		}
+		
+		return self.actions[self.actions.count - 1]
+	}
+	
 	public init(actions: [WWActionData]) {
 		self.actions = actions
 	}
