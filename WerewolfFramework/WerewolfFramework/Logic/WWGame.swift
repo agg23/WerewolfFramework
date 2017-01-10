@@ -44,6 +44,9 @@ public class WWGame {
 		self.nonHumanPlayers = [WWPlayer]()
 		
 		self.characters = [WWCharacter]()
+		
+		self.actions = [WWPlayer: WWAction]()
+		self.nightCanEnd = false
 	}
 	
 	public func generateRound() {
@@ -63,6 +66,7 @@ public class WWGame {
 		
 		self.state = WWState(players: self.allPlayers, characters: self.characters, assignments: assignments)
 		self.actions = [WWPlayer: WWAction]()
+		self.nightCanEnd = false
 	}
 	
 	public func clearState() {
@@ -126,7 +130,7 @@ public class WWGame {
 				continue
 			}
 			character.perform(action: action!, with: state)
-		}		
+		}
 	}
 	
 	public func endGame() {
