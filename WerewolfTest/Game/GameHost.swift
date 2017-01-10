@@ -91,7 +91,7 @@ class GameHost: GameController {
 	// MARK: - Host Player
 	
 	func registerHostPlayer(with name: String) {
-		self.host = self.game.registerPlayer(name: name, internalIdentifier: "host")
+		self.host = self.game.registerPlayer(name: name, internalIdentifier: UIDevice.current.name)
 	}
 	
 	func sendToHost(data: Data) {

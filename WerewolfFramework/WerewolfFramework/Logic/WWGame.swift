@@ -139,7 +139,17 @@ public class WWGame {
 		
 		let shouldUpdate = character?.received(action: action) ?? false
 		
-		self.actions[player] = action
+		let previousAction = self.actions[player]
+		
+		var finalAction: WWAction
+		
+		if previousAction != nil {
+			finalAction = WWAction(actions: previousAction!.actions + action.actions)
+		} else {
+			finalAction = action
+		}
+		
+		self.actions[player] = finalAction
 		
 		if self.actions.count == self.players.count {
 			self.nightCanEnd = true
