@@ -208,7 +208,7 @@ public class WWGame {
 		}
 		
 		for i in 0 ..< count {
-			let name = String(format: "Nonhuman Player %d", i)
+			let name = String(format: "Center Card %d", i + 1)
 			self.nonHumanPlayers.append(WWPlayer(name: name, internalIdentifier: "nonhuman", human: false))
 		}
 	}
