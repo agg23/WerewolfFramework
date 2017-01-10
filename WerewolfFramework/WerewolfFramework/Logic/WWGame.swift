@@ -25,7 +25,7 @@ public class WWGame {
 	
 	public var nightCanEnd: Bool
 	
-	private var actions: [WWAction]
+	private var actions: [WWPlayer: WWAction]
 	
 	public init(name: String) {
 		self.name = name
@@ -37,7 +37,7 @@ public class WWGame {
 		
 		self.nightCanEnd = false
 		
-		self.actions = [WWAction]()
+		self.actions = [WWPlayer: WWAction]()
 	}
 	
 	public func resetGame() {
@@ -61,8 +61,8 @@ public class WWGame {
 			assignments[i] = character
 		}
 		
-		self.state = WWState(players: self.allPlayers, assignments: assignments)
-		self.actions = [WWAction]()
+		self.state = WWState(players: self.allPlayers, characters: self.characters, assignments: assignments)
+		self.actions = [WWPlayer: WWAction]()
 	}
 	
 	public func clearState() {
@@ -99,15 +99,19 @@ public class WWGame {
 		
 		state.status = .discussion
 		
-		for action in self.actions {
-			if action.ordering.count < 1 {
+		let playerAssignments = state.playerAssignments
+		
+		for (player, action) in self.actions {
+			if action.actions.count < 1 {
 				print("[ERROR] Attempting to process WWAction with no ordering")
 				continue
 			}
 			
-			let index = action.ordering[action.ordering.count - 1]
-			let lastCharacter = self.characters[index]
-			lastCharacter.perform(action: action, with: state)
+			guard let character = playerAssignments[player] else {
+				print("[ERROR] WWAction with invalid player")
+				continue
+			}
+			character.perform(action: action, with: state)
 		}
 	}
 	
@@ -117,20 +121,31 @@ public class WWGame {
 	
 	// MARK: - Communication
 	
-	public func add(action: WWAction) {
-		// TODO: Call to WWCharacter to check if some more input is needed from the client
-		
-		if self.actions.contains(where: { (innerAction) -> Bool in
-			action.ordering[0] == innerAction.ordering[0]
-		}) {
-			print("[ERROR] Attempted to add WWAction to game with already existing starting character")
+	/**
+		Adds the provided WWAction to the list of queued actions. Returns true if the WWCharacter indicated a status update should be sent to the client
+	*/
+	public func add(action: WWAction, for player: WWPlayer) -> Bool {
+		if action.actions.count < 1 {
+			print("[ERROR] Attempting to process WWAction with no action data")
+			return false
 		}
 		
-		self.actions.append(action)
+		guard let playerIndex = index(of: player) else {
+			print("[ERROR] Invalid player provided on action add")
+			return false
+		}
+		
+		let character = self.state?.assignments[playerIndex]
+		
+		let shouldUpdate = character?.received(action: action) ?? false
+		
+		self.actions[player] = action
 		
 		if self.actions.count == self.players.count {
 			self.nightCanEnd = true
 		}
+		
+		return shouldUpdate
 	}
 	
 	// MARK: - Player/Character Management
@@ -149,13 +164,32 @@ public class WWGame {
 		return player
 	}
 	
+	public func player(with id: String) -> WWPlayer? {
+		for i in 0 ..< self.players.count {
+			if self.players[i].internalIdentifier == id {
+				return self.players[i]
+			}
+		}
+		return nil
+	}
+	
 	public func removePlayer(id: String) {
 		for i in 0 ..< self.players.count {
-			if self.players[i].name == id {
+			if self.players[i].internalIdentifier == id {
 				self.players.remove(at: i)
 				return
 			}
 		}
+	}
+	
+	private func index(of player: WWPlayer) -> Int? {
+		for i in 0 ..< self.players.count {
+			if self.players[i] == player {
+				return i
+			}
+		}
+		
+		return nil
 	}
 	
 	public func registerNonHumanPlayers(count: Int) {

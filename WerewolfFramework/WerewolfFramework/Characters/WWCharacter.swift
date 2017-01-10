@@ -58,6 +58,13 @@ public class WWCharacter: NSObject, NSCoding {
 		
 	}
 	
+	/**
+		Performs any necessary changes based on the provided WWAction. Returns true if updated state needs to be sent to the owning client
+	*/
+	public func received(action: WWAction) -> Bool {
+		return false
+	}
+	
 	public func selectable(player: WWPlayer) -> Bool {
 		return viewable(player: player, viewable: self.selectable)
 	}

@@ -62,27 +62,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			return
 		}
 		
-		guard let playerIndex = state.players.index(where: { (player) -> Bool in
-			return player == self.client?.player
-		}) else {
-			return
-		}
-		
-		let ordering: [Int] = [playerIndex]
-		var delta: [Int: WWActionData]
+		var actions = [WWActionData]()
 		
 		switch selectedCount {
 		case 0:
-			delta = [playerIndex: WWActionData(first: nil, second: nil)]
+			actions.append(WWActionData(first: nil, second: nil))
 		case 1:
-			delta = [playerIndex: WWActionData(first: self.tableView.indexPathsForSelectedRows?[0].row, second: nil)]
+			actions.append(WWActionData(first: self.tableView.indexPathsForSelectedRows?[0].row, second: nil))
 		case 2:
-			delta = [playerIndex: WWActionData(first: self.tableView.indexPathsForSelectedRows?[0].row, second: self.tableView.indexPathsForSelectedRows?[1].row)]
+			actions.append(WWActionData(first: self.tableView.indexPathsForSelectedRows?[0].row, second: self.tableView.indexPathsForSelectedRows?[1].row))
 		default:
-			delta = [Int: WWActionData]()
+			break
 		}
 		
-		let action = WWAction(ordering: ordering, delta: delta)
+		let action = WWAction(actions: actions)
 		let peerData = PeerData(action: action)
 		self.client?.send(data: peerData)
 	}

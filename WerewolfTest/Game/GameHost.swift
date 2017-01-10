@@ -136,7 +136,7 @@ class GameHost: GameController {
 		send(data: peerData, to: player)
 	}
 	
-	func actionUpdate(data: PeerData) {
+	func actionUpdate(data: PeerData, from sender: String) {
 		guard let action = data.action else {
 			print("[ERROR] Received actionupdate command, with no included action")
 			return
@@ -144,7 +144,10 @@ class GameHost: GameController {
 		
 		print("Received actionupdate")
 		
-		self.game.add(action: action)
+		if let player = self.game.player(with: sender), self.game.add(action: action, for: player) {
+			print("Sending client \(sender) updated state as indicated by WWCharacter")
+			sendStatus(to: player)
+		}
 		
 		if self.game.nightCanEnd {
 			startDiscussion()
@@ -214,7 +217,7 @@ class GameHost: GameController {
 		
 		switch peerData.command {
 		case .actionupdate:
-			actionUpdate(data: peerData)
+			actionUpdate(data: peerData, from: sender)
 		case .registername:
 			registerName(data: peerData, from: sender)
 		case .stateupdate:

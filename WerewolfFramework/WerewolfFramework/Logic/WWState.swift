@@ -18,12 +18,14 @@ public class WWState: NSObject, NSCoding {
 	}
 	
 	public var players: [WWPlayer]
+	public var characters: [WWCharacter]
 	public var assignments: [Int: WWCharacter]
 	
 	public var status: GameStatus
 	
-	init(players: [WWPlayer], assignments: [Int: WWCharacter]) {
+	init(players: [WWPlayer], characters: [WWCharacter], assignments: [Int: WWCharacter]) {
 		self.players = players
+		self.characters = characters
 		self.assignments = assignments
 		
 		self.status = .nogame
@@ -44,6 +46,7 @@ public class WWState: NSObject, NSCoding {
 	
 	public func encode(with coder: NSCoder) {
 		coder.encode(self.players, forKey: "players")
+		coder.encode(self.characters, forKey: "characters")
 		coder.encode(self.assignments, forKey: "assignments")
 		
 		coder.encode(self.status.rawValue, forKey: "status")
@@ -56,6 +59,13 @@ public class WWState: NSObject, NSCoding {
 		}
 		
 		self.players = players
+		
+		guard let characters = decoder.decodeObject(forKey: "characters") as? [WWCharacter] else {
+			print("[ERROR] Cannot decode characters")
+			return nil
+		}
+		
+		self.characters = characters
 		
 		guard let assignments = decoder.decodeObject(forKey: "assignments") as? [Int: WWCharacter] else {
 			print("[ERROR] Cannot decode assignments")
