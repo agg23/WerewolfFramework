@@ -39,8 +39,29 @@ public class WWWerewolf: WWCharacter {
 		
 		if werewolfCount == 1 {
 			self.interactionCount = 1
+			self.selectionComplete = false
 		} else {
 			self.interactionCount = 0
+			self.selectionComplete = true
 		}
+	}
+	
+	public override func received(action: WWAction, state: WWState) -> Bool {
+		let firstActionData = action.actions[0]
+		
+		guard let first = firstActionData.firstSelection else {
+			print("[WARNING] Invalid WWActionData for Werewolf")
+			return false
+		}
+		
+		if let character = state.assignments[first] {
+			self.seenAssignments[first] = type(of: character)
+		} else {
+			print("[WARNING] Invalid selected character for Werewolf")
+		}
+		
+		self.selectionComplete = true
+		
+		return true
 	}
 }
