@@ -56,6 +56,10 @@ public class WWPI: WWCharacter {
 			return false
 		}
 		
+		if self.firstCharacterSelect {
+			self.selectionComplete = true
+		}
+		
 		if let character = state.assignments[first] {
 			self.firstCharacterSelect = true
 			
@@ -72,10 +76,6 @@ public class WWPI: WWCharacter {
 			}
 		} else {
 			print("[WARNING] Invalid selected character for PI")
-		}
-		
-		if self.firstCharacterSelect {
-			self.selectionComplete = true
 		}
 		
 		return true

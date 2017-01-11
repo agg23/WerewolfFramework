@@ -179,7 +179,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			
 			if let character = self.client!.character {
 				if character.transferedCharacterName != nil {
-					string += " (Was \(character.name); Became \(character.transferedCharacterName))"
+					string += " (Was \(character.name); Became \(character.transferedCharacterName!))"
 				} else {
 					string += " (\(character.name))"
 				}
