@@ -14,7 +14,7 @@ public class WWWitch: WWCharacter {
 	public init() {
 		self.humanPlayerSelect = false
 		
-		super.init(name: "Witch", instructions: "I am a Witch", turnOrder: .concurrent, orderNumber: 20, selectable: .nonHumanOnly, interactionCount: 1, defaultVisible: [], defaultViewable: .none)
+		super.init(name: "Witch", instructions: "I am a Witch", turnOrder: .concurrent, orderNumber: 20, selectable: .nonHumanOnly, interactionCount: 1, canSelectSelf: true, defaultVisible: [], defaultViewable: .none)
 	}
 	
 	public required init?(coder decoder: NSCoder) {

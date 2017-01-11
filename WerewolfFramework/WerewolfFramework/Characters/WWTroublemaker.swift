@@ -10,7 +10,7 @@ import Foundation
 
 public class WWTroublemaker: WWCharacter {
 	public init() {
-		super.init(name: "Troublemaker", instructions: "I am a Troublemaker", turnOrder: .concurrent, orderNumber: 100, selectable: .humanOnly, interactionCount: 2, defaultVisible: [], defaultViewable: .none)
+		super.init(name: "Troublemaker", instructions: "I am a Troublemaker", turnOrder: .concurrent, orderNumber: 100, selectable: .humanOnly, interactionCount: 2, canSelectSelf: false, defaultVisible: [], defaultViewable: .none)
 	}
 	
 	public required init?(coder decoder: NSCoder) {

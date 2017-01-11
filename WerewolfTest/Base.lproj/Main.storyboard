@@ -44,7 +44,7 @@
                                     <action selector="startAdvertisingPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="usM-ZH-bO8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9L7-fl-tXB">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9L7-fl-tXB">
                                 <rect key="frame" x="148" y="562" width="78" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Start Game"/>
@@ -98,7 +98,9 @@
                     </view>
                     <connections>
                         <outlet property="characterLabel" destination="eam-si-I5M" id="OoK-ly-UWs"/>
+                        <outlet property="confirmActionButton" destination="i1R-SE-dMt" id="feM-nN-CHF"/>
                         <outlet property="gameStatusLabel" destination="Hp3-LU-fHh" id="LNX-Zr-sGs"/>
+                        <outlet property="startGameButton" destination="9L7-fl-tXB" id="Xcx-aW-xE9"/>
                         <outlet property="tableView" destination="cyL-8f-2kL" id="Yy0-Gs-nwa"/>
                         <outlet property="textField" destination="Rzt-ei-1hK" id="LOK-jo-j0d"/>
                     </connections>

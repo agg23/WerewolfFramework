@@ -16,6 +16,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	@IBOutlet weak var gameStatusLabel: UILabel!
 	@IBOutlet weak var characterLabel: UILabel!
 	
+	@IBOutlet weak var confirmActionButton: UIButton!
+	@IBOutlet weak var startGameButton: UIButton!
+	
 	var host: GameHost?
 	var client: GameClient?
 	
@@ -87,6 +90,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		MultipeerCommunication.shared.startBrowser()
 		
 		self.host = GameHost(client: self.client!)
+		
+		self.startGameButton.isEnabled = true
 	}
 	
 	@IBAction func startGamePressed(_ sender: Any) {
@@ -123,7 +128,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		if character?.interactionCount == 0 {
 			self.tableView.allowsSelection = false
 		} else {
-		self.tableView.allowsMultipleSelection = true
+			self.tableView.allowsMultipleSelection = true
+		}
+		
+		if state.status != .night || (character != nil && character!.selectionComplete) {
+			self.tableView.allowsSelection = false
+		}
+		
+		if character != nil && character!.selectionComplete {
+			self.confirmActionButton.isEnabled = false
+		} else {
+			self.confirmActionButton.isEnabled = true
 		}
 	}
 	
@@ -188,11 +203,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			return nil
 		}
 		
-		if state.status != .night || character.selectionComplete {
+		let player = state.players[indexPath.row]
+		
+		if player == self.client?.player && !character.canSelectSelf {
 			return nil
 		}
-		
-		let player = state.players[indexPath.row]
 		
 		let selectedCount = (tableView.indexPathsForSelectedRows?.count ?? 0) + 1
 		

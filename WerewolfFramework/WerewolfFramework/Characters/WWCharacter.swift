@@ -31,6 +31,7 @@ public class WWCharacter: NSObject, NSCoding {
 	
 	public var selectable: Viewable
 	public var interactionCount: Int
+	public var canSelectSelf: Bool
 	
 	public var defaultVisible: [WWCharacter.Type]
 	public var defaultViewable: Viewable
@@ -41,12 +42,13 @@ public class WWCharacter: NSObject, NSCoding {
 	
 	public var instructions: String
 	
-	public init(name: String, instructions: String, turnOrder: TurnOrder, orderNumber: Int, selectable: Viewable, interactionCount: Int, defaultVisible: [WWCharacter.Type], defaultViewable: Viewable) {
+	public init(name: String, instructions: String, turnOrder: TurnOrder, orderNumber: Int, selectable: Viewable, interactionCount: Int, canSelectSelf: Bool, defaultVisible: [WWCharacter.Type], defaultViewable: Viewable) {
 		self.name = name
 		self.turnOrder = turnOrder
 		self.orderNumber = orderNumber
 		self.instructions = instructions
 		self.selectable = selectable
+		self.canSelectSelf = canSelectSelf
 		self.interactionCount = interactionCount
 		self.defaultVisible = defaultVisible
 		self.defaultViewable = defaultViewable
@@ -111,6 +113,7 @@ public class WWCharacter: NSObject, NSCoding {
 		coder.encode(self.turnOrder.rawValue, forKey: "order")
 		coder.encode(self.selectable.rawValue, forKey: "selectable")
 		coder.encode(self.interactionCount, forKey: "count")
+		coder.encode(self.canSelectSelf, forKey: "selectself")
 		
 		var array = [String]()
 		
@@ -145,6 +148,7 @@ public class WWCharacter: NSObject, NSCoding {
 		self.turnOrder = TurnOrder(rawValue: decoder.decodeInteger(forKey: "order")) ?? .inactive
 		self.selectable = Viewable(rawValue: decoder.decodeInteger(forKey: "selectable")) ?? .none
 		self.interactionCount = decoder.decodeInteger(forKey: "count")
+		self.canSelectSelf = decoder.decodeBool(forKey: "selectself")
 		
 		guard let visible = decoder.decodeObject(forKey: "defaultVisible") as? [String] else {
 			print("[ERROR] Cannot decode character default visible")
