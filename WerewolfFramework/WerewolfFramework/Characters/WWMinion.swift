@@ -11,10 +11,16 @@ import Foundation
 public class WWMinion: WWCharacter {
 	public init() {
 		super.init(name: "Minion", instructions: "I am a Minion", turnOrder: .concurrent, orderNumber: 2, selectable: .none, interactionCount: 0, defaultVisible: [WWWerewolf.self], defaultViewable: .humanOnly)
+		self.selectionComplete = true
 	}
 	
 	public required init?(coder decoder: NSCoder) {
 		super.init(coder: decoder)
+	}
+	
+	public override func beginNight(with state: WWState) {
+		// For some reason necessary
+		self.selectionComplete = true
 	}
 	
 	override public func perform(action: WWAction, with state: WWState) {

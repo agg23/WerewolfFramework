@@ -196,9 +196,15 @@ public class WWGame {
 		
 		self.actions[player] = finalAction
 		
-		if self.actions.count == self.players.count {
-			self.nightCanEnd = true
+		var endNight = true
+		
+		for (playerIndex, loopCharacter) in state.assignments {
+			if self.allPlayers[playerIndex].isHumanPlayer {
+				endNight = endNight && loopCharacter.selectionComplete
+			}
 		}
+		
+		self.nightCanEnd = endNight
 		
 		return shouldUpdate
 	}

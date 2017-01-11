@@ -34,4 +34,10 @@ public class WWTroublemaker: WWCharacter {
 		state.assignments[first] = state.assignments[second]
 		state.assignments[second] = temp
 	}
+	
+	public override func received(action: WWAction, state: WWState) -> Bool {
+		self.selectionComplete = true
+		
+		return false
+	}
 }
