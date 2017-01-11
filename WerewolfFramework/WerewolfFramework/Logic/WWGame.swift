@@ -95,13 +95,20 @@ public class WWGame {
 		}
 	}
 	
-	public func startDiscussion() {
+	public func setDiscussionStatus() {
+		state?.status = .discussion
+	}
+	
+	/**
+		Starts the discussion period of the game. Performs all of the queued WWActions and builds an array of players that need updated state after the night has concluded (for example, the insomniac)
+	*/
+	public func startDiscussion() -> [WWPlayer] {
 		guard let state = self.state else {
 			print("[ERROR] Cannot start discussion. No state exists")
-			return
+			return []
 		}
 		
-		state.status = .discussion
+		setDiscussionStatus()
 		
 		let playerAssignments = state.playerAssignments
 		
@@ -131,6 +138,16 @@ public class WWGame {
 			}
 			character.perform(action: action!, with: state)
 		}
+		
+		var array = [WWPlayer]()
+		
+		for (player, character) in playerAssignments {
+			if character.turnOrder == .last {
+				array.append(player)
+			}
+		}
+		
+		return array
 	}
 	
 	public func endGame() {
@@ -143,6 +160,11 @@ public class WWGame {
 		Adds the provided WWAction to the list of queued actions. Returns true if the WWCharacter indicated a status update should be sent to the client
 	*/
 	public func add(action: WWAction, for player: WWPlayer) -> Bool {
+		guard let state = self.state else {
+			print("[ERROR] Cannot add action. No state exists")
+			return false
+		}
+		
 		if action.actions.count < 1 {
 			print("[ERROR] Attempting to process WWAction with no action data")
 			return false
@@ -153,9 +175,14 @@ public class WWGame {
 			return false
 		}
 		
-		let character = self.state?.assignments[playerIndex]
+		let character = state.assignments[playerIndex]
 		
-		let shouldUpdate = character?.received(action: action) ?? false
+		if character != nil && character!.selectionComplete {
+			print("[WARNING] Attemped to add WWAction to character that is already complete")
+			return false
+		}
+		
+		let shouldUpdate = character?.received(action: action, state: state) ?? false
 		
 		let previousAction = self.actions[player]
 		
@@ -182,8 +209,8 @@ public class WWGame {
 		let player = WWPlayer(name: name, internalIdentifier: internalIdentifier, human: true)
 		
 		for player in self.players {
-			if player.name == name {
-				return nil
+			if player.internalIdentifier == internalIdentifier {
+				return player
 			}
 		}
 		

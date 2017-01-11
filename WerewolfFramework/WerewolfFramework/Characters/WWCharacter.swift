@@ -35,6 +35,10 @@ public class WWCharacter: NSObject, NSCoding {
 	public var defaultVisible: [WWCharacter.Type]
 	public var defaultViewable: Viewable
 	
+	public var seenAssignments: [Int: WWCharacter.Type]
+	
+	public var selectionComplete: Bool
+	
 	public var instructions: String
 	
 	public init(name: String, instructions: String, turnOrder: TurnOrder, orderNumber: Int, selectable: Viewable, interactionCount: Int, defaultVisible: [WWCharacter.Type], defaultViewable: Viewable) {
@@ -46,6 +50,10 @@ public class WWCharacter: NSObject, NSCoding {
 		self.interactionCount = interactionCount
 		self.defaultVisible = defaultVisible
 		self.defaultViewable = defaultViewable
+		
+		self.selectionComplete = false
+		
+		self.seenAssignments = [Int: WWCharacter.Type]()
 	}
 	
 	/**
@@ -59,13 +67,14 @@ public class WWCharacter: NSObject, NSCoding {
 		Performs any changes dictated by the current WWState, such as a solo Werewolf adding a selectable
 	*/
 	public func beginNight(with state: WWState) {
-		
+		self.selectionComplete = false
+		self.seenAssignments = [Int: WWCharacter.Type]()
 	}
 	
 	/**
 		Performs any necessary changes based on the provided WWAction. Returns true if updated state needs to be sent to the owning client
 	*/
-	public func received(action: WWAction) -> Bool {
+	public func received(action: WWAction, state: WWState) -> Bool {
 		return false
 	}
 	
@@ -112,6 +121,16 @@ public class WWCharacter: NSObject, NSCoding {
 		coder.encode(array, forKey: "defaultVisible")
 		coder.encode(self.defaultViewable.rawValue, forKey: "viewable")
 		
+		var assignments = [Int: String]()
+		
+		for (int, type) in self.seenAssignments {
+			assignments[int] = WWCharacter.characterClassToString(type)
+		}
+		
+		coder.encode(assignments, forKey: "seen")
+		
+		coder.encode(self.selectionComplete, forKey: "complete")
+		
 		coder.encode(self.instructions, forKey: "instructions")
 	}
 	
@@ -142,6 +161,23 @@ public class WWCharacter: NSObject, NSCoding {
 		
 		self.defaultVisible = array
 		self.defaultViewable = Viewable(rawValue: decoder.decodeInteger(forKey: "viewable")) ?? .none
+		
+		guard let seen = decoder.decodeObject(forKey: "seen") as? [Int: String] else {
+			print("[ERROR] Cannot decode character seen")
+			return nil
+		}
+		
+		var assignments = [Int: WWCharacter.Type]()
+		
+		for (int, typeString) in seen {
+			if let characterClass = WWCharacter.stringToCharacterClass(typeString) {
+				assignments[int] = characterClass
+			}
+		}
+		
+		self.seenAssignments = assignments
+		
+		self.selectionComplete = decoder.decodeBool(forKey: "complete")
 		
 		guard let instructions = decoder.decodeObject(forKey: "instructions") as? String else {
 			print("[ERROR] Cannot decode character instructions")

@@ -9,7 +9,7 @@
 import Foundation
 
 public class WWWitch: WWCharacter {
-	var humanPlayerSelect: Bool
+	private var humanPlayerSelect: Bool
 	
 	public init() {
 		self.humanPlayerSelect = false
@@ -39,7 +39,7 @@ public class WWWitch: WWCharacter {
 		}
 		
 		guard let first = firstActionData.firstSelection, let second = secondActionData.firstSelection else {
-			print("[WARNING] Invalid WWActionData for Troublemaker")
+			print("[WARNING] Invalid WWActionData for Witch")
 			return
 		}
 		
@@ -50,13 +50,33 @@ public class WWWitch: WWCharacter {
 	}
 	
 	public override func beginNight(with state: WWState) {
+		super.beginNight(with: state)
 		self.humanPlayerSelect = false
 		
 		self.selectable = .nonHumanOnly
 	}
 	
-	public override func received(action: WWAction) -> Bool {
+	public override func received(action: WWAction, state: WWState) -> Bool {
 		let temp = self.humanPlayerSelect
+		
+		if !self.humanPlayerSelect {
+			// At least 1 data is guaranteed
+			let firstActionData = action.actions[0]
+			
+			guard let first = firstActionData.firstSelection else {
+				print("[WARNING] Invalid WWActionData for Witch")
+				return !temp
+			}
+			
+			if let character = state.assignments[first] {
+				self.seenAssignments[first] = type(of: character)
+			} else {
+				print("[WARNING] Invalid selected character for Witch")
+			}
+		} else if !self.selectionComplete {
+			self.selectionComplete = true
+			return true
+		}
 		
 		self.humanPlayerSelect = true
 		

@@ -69,9 +69,15 @@ class GameHost: GameController {
 	}
 	
 	func startDiscussion() {
-		self.game.startDiscussion()
+		self.game.setDiscussionStatus()
 		
 		sendAllStatus()
+		
+		let playersNeedingState = self.game.startDiscussion()
+		
+		for player in playersNeedingState {
+			sendStatus(to: player)
+		}
 	}
 	
 	func endGame() {

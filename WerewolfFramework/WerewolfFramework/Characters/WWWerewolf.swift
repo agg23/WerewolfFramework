@@ -22,6 +22,8 @@ public class WWWerewolf: WWCharacter {
 	}
 	
 	public override func beginNight(with state: WWState) {
+		super.beginNight(with: state)
+		
 		var werewolfCount = 0
 		
 		for player in state.players {

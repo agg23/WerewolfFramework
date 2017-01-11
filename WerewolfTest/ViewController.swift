@@ -167,6 +167,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 				if contains {
 					string += " (\(character.name))"
 				}
+			} else if type(of: character) == playerCharacter.seenAssignments[indexPath.row] {
+				string += " (\(character.name))"
 			}
 		} else {
 			guard let character = state.playerAssignments[player] else {
