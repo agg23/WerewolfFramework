@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	@IBOutlet weak var confirmActionButton: UIButton!
 	@IBOutlet weak var startGameButton: UIButton!
+	@IBOutlet weak var endGameButton: UIButton!
 	
 	var host: GameHost?
 	var client: GameClient?
@@ -92,11 +93,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		self.host = GameHost(client: self.client!)
 		
 		self.startGameButton.isEnabled = true
+		self.endGameButton.isEnabled = true
 	}
 	
 	@IBAction func startGamePressed(_ sender: Any) {
 		self.host?.registerHostPlayer(with: "Host Player")
 		self.host?.newGame(name: "Test Game Name")
+	}
+	
+	@IBAction func endGamePressed(_ sender: Any) {
+		self.host?.endGame()
 	}
 	
 	func statusUpdate() {

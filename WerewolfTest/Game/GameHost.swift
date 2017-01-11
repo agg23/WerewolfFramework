@@ -157,13 +157,6 @@ class GameHost: GameController {
 		
 		if self.game.nightCanEnd {
 			startDiscussion()
-			
-			// TODO: Should have confirmation, but instead jumps straight to ending the game
-			DispatchQueue.main.async {
-				Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (timer) in
-					self.endGame()
-				}
-			}
 		}
 	}
 	

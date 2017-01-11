@@ -61,7 +61,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ot8-F0-fnZ" id="J8E-b0-USa">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -93,12 +93,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uik-mb-V3b">
+                                <rect key="frame" x="152" y="600" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="End Game"/>
+                                <connections>
+                                    <action selector="endGamePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bev-dy-CKN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="characterLabel" destination="eam-si-I5M" id="OoK-ly-UWs"/>
                         <outlet property="confirmActionButton" destination="i1R-SE-dMt" id="feM-nN-CHF"/>
+                        <outlet property="endGameButton" destination="uik-mb-V3b" id="1v3-FY-Wau"/>
                         <outlet property="gameStatusLabel" destination="Hp3-LU-fHh" id="LNX-Zr-sGs"/>
                         <outlet property="startGameButton" destination="9L7-fl-tXB" id="Xcx-aW-xE9"/>
                         <outlet property="tableView" destination="cyL-8f-2kL" id="Yy0-Gs-nwa"/>
