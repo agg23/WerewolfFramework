@@ -178,7 +178,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			string = " - You"
 			
 			if let character = self.client!.character {
-				string += " (\(character.name))"
+				if character.transferedCharacterName != nil {
+					string += " (Was \(character.name); Became \(character.transferedCharacterName))"
+				} else {
+					string += " (\(character.name))"
+				}
 			}
 		} else if state.status != .nogame {
 			guard let playerCharacter = self.client!.character, let character = state.playerAssignments[player] else {
@@ -199,8 +203,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 				if contains {
 					string += " (\(character.name))"
 				}
-			} else if type(of: character) == playerCharacter.seenAssignments[indexPath.row] {
-				string += " (\(character.name))"
+			} else if let name = playerCharacter.seenAssignments[indexPath.row] {
+				string += " (\(name))"
 			}
 		} else {
 			guard let character = state.playerAssignments[player] else {

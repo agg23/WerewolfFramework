@@ -30,8 +30,8 @@ public class WWSeer: WWCharacter {
 		}
 		
 		if let firstCharacter = state.assignments[first], let secondCharacter = state.assignments[second] {
-			self.seenAssignments[first] = type(of: firstCharacter)
-			self.seenAssignments[second] = type(of: secondCharacter)
+			self.seenAssignments[first] = firstCharacter.name
+			self.seenAssignments[second] = secondCharacter.name
 		} else {
 			print("[WARNING] Invalid selected character(s) for Seer")
 		}

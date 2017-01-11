@@ -44,9 +44,7 @@ public class WWWitch: WWCharacter {
 		}
 		
 		// Nonhuman card
-		let temp = state.assignments[first]
-		state.assignments[first] = state.assignments[second]
-		state.assignments[second] = temp
+		state.swap(first: first, second: second)
 	}
 	
 	public override func beginNight(with state: WWState) {
@@ -69,7 +67,7 @@ public class WWWitch: WWCharacter {
 			}
 			
 			if let character = state.assignments[first] {
-				self.seenAssignments[first] = type(of: character)
+				self.seenAssignments[first] = character.name
 			} else {
 				print("[WARNING] Invalid selected character for Witch")
 			}

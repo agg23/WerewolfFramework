@@ -50,6 +50,17 @@ public class WWState: NSObject, NSCoding {
 		return self.players[index]
 	}
 	
+	func swap(first firstPlayerIndex: Int, second secondPlayerIndex: Int) {
+		let temp = self.assignments[firstPlayerIndex]
+		let temp2 = self.assignments[secondPlayerIndex]
+		
+		temp?.transferedCharacterName = nil
+		temp2?.transferedCharacterName = nil
+		
+		self.assignments[firstPlayerIndex] = temp2
+		self.assignments[secondPlayerIndex] = temp
+	}
+	
 	// MARK: - NSCoding
 	
 	public func encode(with coder: NSCoder) {

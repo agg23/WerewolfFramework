@@ -36,7 +36,9 @@ public class WWCharacter: NSObject, NSCoding {
 	public var defaultVisible: [WWCharacter.Type]
 	public var defaultViewable: Viewable
 	
-	public var seenAssignments: [Int: WWCharacter.Type]
+	public var seenAssignments: [Int: String]
+	
+	public var transferedCharacterName: String?
 	
 	public var selectionComplete: Bool
 	
@@ -55,7 +57,7 @@ public class WWCharacter: NSObject, NSCoding {
 		
 		self.selectionComplete = false
 		
-		self.seenAssignments = [Int: WWCharacter.Type]()
+		self.seenAssignments = [Int: String]()
 	}
 	
 	/**
@@ -70,7 +72,8 @@ public class WWCharacter: NSObject, NSCoding {
 	*/
 	public func beginNight(with state: WWState) {
 		self.selectionComplete = false
-		self.seenAssignments = [Int: WWCharacter.Type]()
+		self.seenAssignments = [Int: String]()
+		self.transferedCharacterName = nil
 	}
 	
 	/**
@@ -124,13 +127,17 @@ public class WWCharacter: NSObject, NSCoding {
 		coder.encode(array, forKey: "defaultVisible")
 		coder.encode(self.defaultViewable.rawValue, forKey: "viewable")
 		
-		var assignments = [Int: String]()
+//		var assignments = [Int: String]()
+//		
+//		for (int, type) in self.seenAssignments {
+//			assignments[int] = WWCharacter.characterClassToString(type)
+//		}
 		
-		for (int, type) in self.seenAssignments {
-			assignments[int] = WWCharacter.characterClassToString(type)
+		coder.encode(self.seenAssignments, forKey: "seen")
+		
+		if self.transferedCharacterName != nil {
+			coder.encode(self.transferedCharacterName, forKey: "transfered")
 		}
-		
-		coder.encode(assignments, forKey: "seen")
 		
 		coder.encode(self.selectionComplete, forKey: "complete")
 		
@@ -171,15 +178,19 @@ public class WWCharacter: NSObject, NSCoding {
 			return nil
 		}
 		
-		var assignments = [Int: WWCharacter.Type]()
+//		var assignments = [Int: WWCharacter.Type]()
+//		
+//		for (int, typeString) in seen {
+//			if let characterClass = WWCharacter.stringToCharacterClass(typeString) {
+//				assignments[int] = characterClass
+//			} else {
+//				print("[WARNING] Could not decode character class string")
+//			}
+//		}
 		
-		for (int, typeString) in seen {
-			if let characterClass = WWCharacter.stringToCharacterClass(typeString) {
-				assignments[int] = characterClass
-			}
-		}
+		self.seenAssignments = seen
 		
-		self.seenAssignments = assignments
+		self.transferedCharacterName = decoder.decodeObject(forKey: "transfered") as? String
 		
 		self.selectionComplete = decoder.decodeBool(forKey: "complete")
 		

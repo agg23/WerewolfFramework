@@ -50,7 +50,7 @@ public class WWRobber: WWCharacter {
 		}
 		
 		if let character = state.assignments[first] {
-			self.seenAssignments[first] = type(of: character)
+			self.seenAssignments[first] = character.name
 		} else {
 			print("[WARNING] Invalid selected character for Robber")
 		}

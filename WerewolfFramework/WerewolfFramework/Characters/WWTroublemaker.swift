@@ -30,9 +30,7 @@ public class WWTroublemaker: WWCharacter {
 			return
 		}
 		
-		let temp = state.assignments[first]
-		state.assignments[first] = state.assignments[second]
-		state.assignments[second] = temp
+		state.swap(first: first, second: second)
 	}
 	
 	public override func received(action: WWAction, state: WWState) -> Bool {
