@@ -140,7 +140,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		
 		let character = client.character
 		
-		self.characterLabel.text = character?.name
+		var string = ""
+		
+		if let character = self.client!.character {
+			if character.transferedCharacterName != nil {
+				string += "\(character.transferedCharacterName!) (was \(character.name))"
+			} else {
+				string += "\(character.name)"
+			}
+		}
+		
+		self.characterLabel.text = string
 		
 		if character?.interactionCount == 0 {
 			self.tableView.allowsSelection = false
@@ -176,14 +186,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		let player = state.players[indexPath.row]
 		if player == self.client!.player {
 			string = " - You"
-			
-			if let character = self.client!.character {
-				if character.transferedCharacterName != nil {
-					string += " (Was \(character.name); Became \(character.transferedCharacterName!))"
-				} else {
-					string += " (\(character.name))"
-				}
-			}
 		} else if state.status != .nogame {
 			guard let playerCharacter = self.client!.character, let character = state.playerAssignments[player] else {
 				return UITableViewCell()
@@ -211,7 +213,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 				return UITableViewCell()
 			}
 			
-			string += " (\(character.name))"
+			if state.status == .nogame, let name = character.transferedCharacterName {
+				string += " (\(name); was \(character.name))"
+			} else {
+				string += " (\(character.name))"
+			}
 		}
 
 		cell.textLabel?.text = state.players[indexPath.row].name + string
