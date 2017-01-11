@@ -33,11 +33,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			self.statusUpdate()
 		}
 		
+		NotificationCenter.default.addObserver(forName: .deviceConnected, object: nil, queue: nil) { (notification) in
+			self.gameStatusLabel.text = "Connected. No Game"
+		}
+		
+		NotificationCenter.default.addObserver(forName: .deviceDisconnected, object: nil, queue: nil) { (notification) in
+			self.gameStatusLabel.text = "Disconnected"
+		}
+		
 		MultipeerCommunication.shared.viewController = self
 		
 		self.client = GameClient()
 		
 		MultipeerCommunication.shared.delegate = self.client!
+		
+		self.gameStatusLabel.text = "Disconnected"
+		self.characterLabel.text = ""
 	}
 
 	override func didReceiveMemoryWarning() {
