@@ -188,6 +188,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			return nil
 		}
 		
+		if state.status != .night || character.selectionComplete {
+			return nil
+		}
+		
 		let player = state.players[indexPath.row]
 		
 		let selectedCount = (tableView.indexPathsForSelectedRows?.count ?? 0) + 1
