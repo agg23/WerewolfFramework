@@ -49,6 +49,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		
 		MultipeerCommunication.shared.delegate = self.client!
 		
+		self.textField.text = UIDevice.current.name
+		
 		self.gameStatusLabel.text = "Disconnected"
 		self.characterLabel.text = ""
 	}
