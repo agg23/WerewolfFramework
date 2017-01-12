@@ -35,7 +35,7 @@ class GameHost: GameController {
 		
 		self.game.registerNonHumanPlayers(count: 3)
 		
-		let characters = [WWWerewolf(), WWWerewolf(), WWPI(), WWRobber(), WWTroublemaker(), WWWitch(), WWSeer(), WWMinion()]
+		let characters = [WWWerewolf(), WWWerewolf(), WWMinion(), WWRobber(), WWWitch(), WWSeer(), WWTroublemaker(), WWPI()]
 		
 		for i in 0 ..< self.game.players.count + self.game.nonHumanPlayers.count {
 			self.game.register(character: characters[i])
