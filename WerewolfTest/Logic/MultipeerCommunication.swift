@@ -42,7 +42,15 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 	
 	override init() {
 		self.displayName = UIDevice.current.name
-		self.localPeerID = MCPeerID(displayName: self.displayName)
+		
+		// Prevents duplicate devices showing up in browser
+		let id = UserDefaults.standard.data(forKey: "peerID")
+		if id != nil {
+			self.localPeerID = NSKeyedUnarchiver.unarchiveObject(with: id!) as! MCPeerID
+		} else {
+			self.localPeerID = MCPeerID(displayName: self.displayName)
+			UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: self.localPeerID), forKey: "peerID")
+		}
 		
 		self.advertiser = MCNearbyServiceAdvertiser(peer: localPeerID, discoveryInfo: nil, serviceType: MultipeerCommunication.serviceType)
 		
