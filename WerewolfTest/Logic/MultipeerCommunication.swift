@@ -14,14 +14,14 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 	
 	private static let serviceType = "were2-service"
 	
-	var displayName: String {
-		didSet {
-			displayNameUpdate()
-			
-			self.advertiser.delegate = self
-			self.session.delegate = self
-		}
-	}
+	let displayName: String
+//		didSet {
+//			displayNameUpdate()
+//			
+//			self.advertiser.delegate = self
+//			self.session.delegate = self
+//		}
+//	}
 	
 	var localPeerID: MCPeerID
 	private var advertiser: MCNearbyServiceAdvertiser
@@ -67,15 +67,15 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		self.session.delegate = self
 	}
 	
-	private func displayNameUpdate() {
-		self.localPeerID = MCPeerID(displayName: self.displayName)
-		
-		self.advertiser = MCNearbyServiceAdvertiser(peer: localPeerID, discoveryInfo: nil, serviceType: MultipeerCommunication.serviceType)
-		
-		self.browser = MCNearbyServiceBrowser(peer: localPeerID, serviceType: MultipeerCommunication.serviceType)
-		
-		self.session = MCSession(peer: localPeerID, securityIdentity: nil, encryptionPreference: .none)
-	}
+//	private func displayNameUpdate() {
+//		self.localPeerID = MCPeerID(displayName: self.displayName)
+//		
+//		self.advertiser = MCNearbyServiceAdvertiser(peer: localPeerID, discoveryInfo: nil, serviceType: MultipeerCommunication.serviceType)
+//		
+//		self.browser = MCNearbyServiceBrowser(peer: localPeerID, serviceType: MultipeerCommunication.serviceType)
+//		
+//		self.session = MCSession(peer: localPeerID, securityIdentity: nil, encryptionPreference: .none)
+//	}
 	
 	func startAdvertising() {
 		self.advertiser.startAdvertisingPeer()

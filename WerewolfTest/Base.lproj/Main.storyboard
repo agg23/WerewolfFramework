@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,40 +22,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FsH-IM-Idv">
-                                <rect key="frame" x="171" y="524" width="33" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FsH-IM-Idv">
+                                <rect key="frame" x="171" y="579" width="33" height="30"/>
                                 <state key="normal" title="Host"/>
                                 <connections>
                                     <action selector="hostPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZgT-13-tN5"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rzt-ei-1hK">
-                                <rect key="frame" x="89" y="41" width="196" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rzt-ei-1hK">
+                                <rect key="frame" x="16" y="40" width="268" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDa-oi-hkm">
-                                <rect key="frame" x="129" y="97" width="116" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDa-oi-hkm">
+                                <rect key="frame" x="129" y="78" width="116" height="30"/>
                                 <state key="normal" title="Start Advertising"/>
                                 <connections>
                                     <action selector="startAdvertisingPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="usM-ZH-bO8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9L7-fl-tXB">
-                                <rect key="frame" x="148" y="562" width="78" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Start Game"/>
-                                <connections>
-                                    <action selector="startGamePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xmh-2L-eUM"/>
-                                </connections>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cyL-8f-2kL">
-                                <rect key="frame" x="16" y="178" width="343" height="294"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cyL-8f-2kL">
+                                <rect key="frame" x="16" y="144.5" width="343" height="388.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Ot8-F0-fnZ">
@@ -71,44 +60,85 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="EVF-pT-Fpe"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hp3-LU-fHh">
-                                <rect key="frame" x="16" y="148" width="166" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hp3-LU-fHh">
+                                <rect key="frame" x="16" y="116" width="98.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1R-SE-dMt">
-                                <rect key="frame" x="136" y="480" width="103" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1R-SE-dMt">
+                                <rect key="frame" x="136" y="541" width="103" height="30"/>
                                 <state key="normal" title="Confirm Action"/>
                                 <connections>
                                     <action selector="confirmActionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ql3-Se-v00"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Char Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eam-si-I5M">
-                                <rect key="frame" x="212" y="149" width="147" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBd-kD-q3F">
+                                <rect key="frame" x="292" y="40" width="67" height="30"/>
+                                <state key="normal" title="Set Name"/>
+                                <connections>
+                                    <action selector="setNamePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bUT-JX-1rk"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rKB-Wc-B0q">
+                                <rect key="frame" x="16" y="617" width="343" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9L7-fl-tXB">
+                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="30"/>
+                                        <state key="normal" title="Start Game"/>
+                                        <connections>
+                                            <action selector="startGamePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xmh-2L-eUM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uik-mb-V3b">
+                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="30"/>
+                                        <state key="normal" title="End Game"/>
+                                        <connections>
+                                            <action selector="endGamePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bev-dy-CKN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Char Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eam-si-I5M">
+                                <rect key="frame" x="273" y="116" width="86" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uik-mb-V3b">
-                                <rect key="frame" x="152" y="600" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="End Game"/>
-                                <connections>
-                                    <action selector="endGamePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bev-dy-CKN"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Rzt-ei-1hK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="5JW-wM-P12"/>
+                            <constraint firstItem="rKB-Wc-B0q" firstAttribute="top" secondItem="FsH-IM-Idv" secondAttribute="bottom" constant="8" id="6Mj-i1-nV7"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Hp3-LU-fHh" secondAttribute="leading" id="6SD-C2-VgJ"/>
+                            <constraint firstItem="Hp3-LU-fHh" firstAttribute="top" secondItem="BDa-oi-hkm" secondAttribute="bottom" constant="8" id="7ON-iJ-7rD"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rKB-Wc-B0q" secondAttribute="bottom" constant="20" id="CJA-Rp-pny"/>
+                            <constraint firstItem="eam-si-I5M" firstAttribute="top" secondItem="BDa-oi-hkm" secondAttribute="bottom" constant="8" id="HYM-3h-5Yl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eam-si-I5M" secondAttribute="trailing" id="HyO-at-3v0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cyL-8f-2kL" secondAttribute="trailing" id="NDl-HK-5Qm"/>
+                            <constraint firstItem="kBd-kD-q3F" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="Raz-sE-lsm"/>
+                            <constraint firstItem="FsH-IM-Idv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rrq-ny-Xg6"/>
+                            <constraint firstItem="BDa-oi-hkm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sra-YA-tlv"/>
+                            <constraint firstItem="rKB-Wc-B0q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ZIb-nJ-V5v"/>
+                            <constraint firstItem="i1R-SE-dMt" firstAttribute="top" secondItem="cyL-8f-2kL" secondAttribute="bottom" constant="8" id="ZNl-OH-TB4"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Rzt-ei-1hK" secondAttribute="leading" id="cGK-c3-o28"/>
+                            <constraint firstItem="BDa-oi-hkm" firstAttribute="top" secondItem="Rzt-ei-1hK" secondAttribute="bottom" constant="8" id="ex5-UC-Qx3"/>
+                            <constraint firstItem="cyL-8f-2kL" firstAttribute="top" secondItem="Hp3-LU-fHh" secondAttribute="bottom" constant="8" id="fPo-ZI-bWC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kBd-kD-q3F" secondAttribute="trailing" id="hGb-KI-bGl"/>
+                            <constraint firstItem="FsH-IM-Idv" firstAttribute="top" secondItem="i1R-SE-dMt" secondAttribute="bottom" constant="8" id="hnK-ZP-xFM"/>
+                            <constraint firstItem="kBd-kD-q3F" firstAttribute="leading" secondItem="Rzt-ei-1hK" secondAttribute="trailing" constant="8" id="jpb-JF-jSD"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="cyL-8f-2kL" secondAttribute="leading" id="k0n-mF-YOp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rKB-Wc-B0q" secondAttribute="trailing" id="leM-9v-7PH"/>
+                            <constraint firstItem="i1R-SE-dMt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nMh-8I-fwX"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="characterLabel" destination="eam-si-I5M" id="OoK-ly-UWs"/>
                         <outlet property="confirmActionButton" destination="i1R-SE-dMt" id="feM-nN-CHF"/>
                         <outlet property="endGameButton" destination="uik-mb-V3b" id="1v3-FY-Wau"/>
                         <outlet property="gameStatusLabel" destination="Hp3-LU-fHh" id="LNX-Zr-sGs"/>
+                        <outlet property="hostButton" destination="FsH-IM-Idv" id="R95-Ha-d8d"/>
+                        <outlet property="startAdvertisingButton" destination="BDa-oi-hkm" id="Bcq-PB-tT6"/>
                         <outlet property="startGameButton" destination="9L7-fl-tXB" id="Xcx-aW-xE9"/>
                         <outlet property="tableView" destination="cyL-8f-2kL" id="Yy0-Gs-nwa"/>
                         <outlet property="textField" destination="Rzt-ei-1hK" id="LOK-jo-j0d"/>

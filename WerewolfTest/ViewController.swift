@@ -16,7 +16,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	@IBOutlet weak var gameStatusLabel: UILabel!
 	@IBOutlet weak var characterLabel: UILabel!
 	
+	@IBOutlet weak var startAdvertisingButton: UIButton!
 	@IBOutlet weak var confirmActionButton: UIButton!
+	@IBOutlet weak var hostButton: UIButton!
 	@IBOutlet weak var startGameButton: UIButton!
 	@IBOutlet weak var endGameButton: UIButton!
 	
@@ -55,11 +57,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
+	
+	@IBAction func setNamePressed(_ sender: Any) {
+		if let text = self.textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), text != "" {
+			self.client!.name = text
+			self.startAdvertisingButton.isEnabled = true
+			self.hostButton.isEnabled = true
+			self.textField.endEditing(true)
+		}
+	}
 
 	@IBAction func startAdvertisingPressed(_ sender: Any) {
-		if let text = textField.text, text != "" {
-			MultipeerCommunication.shared.displayName = text
-		}
+		self.hostButton.isEnabled = false
 		
 		MultipeerCommunication.shared.startAdvertising()
 	}
@@ -105,10 +114,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		
 		self.startGameButton.isEnabled = true
 		self.endGameButton.isEnabled = true
+		self.startAdvertisingButton.isEnabled = false
 	}
 	
 	@IBAction func startGamePressed(_ sender: Any) {
-		self.host?.registerHostPlayer(with: "Host Player")
+		var hostName = self.client?.name
+		
+		if hostName == nil {
+			hostName = "Host Player"
+		}
+		
+		self.host?.registerHostPlayer(with: hostName!)
 		self.host?.newGame(name: "Test Game Name")
 	}
 	
