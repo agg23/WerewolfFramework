@@ -127,7 +127,7 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		self.session.disconnect()
 	}
 	
-	// MARK: MCSessionDelegate -
+	// MARK: - MCSessionDelegate
 	
 	func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
 //		DispatchQueue.main.async {
@@ -188,7 +188,7 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		certificateHandler(true)
 	}
 	
-	// MARK: MCNearbyServiceAdvertiserDelegate -
+	// MARK: - MCNearbyServiceAdvertiserDelegate
 	
 	func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
 		
@@ -217,7 +217,7 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		self.viewController?.present(alertController, animated: true, completion: nil)
 	}
 	
-	// MARK: MCNearbyServiceBrowserDelegate -
+	// MARK: - MCNearbyServiceBrowserDelegate
 	
 	func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
 		print("Peer lost")
@@ -231,7 +231,7 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		print("Did not start")
 	}
 	
-	// MARK: MCBrowserViewControllerDelegate -
+	// MARK: - MCBrowserViewControllerDelegate
 	
 	func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
 		print("Browser view controller finished")

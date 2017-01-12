@@ -21,7 +21,7 @@ public class WWPlayer: NSObject, NSCoding, NSCopying {
 		self.internalIdentifier = internalIdentifier;
 	}
 	
-	// MARK: Hashable -
+	// MARK: - Hashable
 	
 	override public var hashValue: Int {
 		return self.internalIdentifier.hashValue
@@ -31,7 +31,7 @@ public class WWPlayer: NSObject, NSCoding, NSCopying {
 		return lhs.name == rhs.name && lhs.internalIdentifier == rhs.internalIdentifier
 	}
 	
-	// MARK: NSCoding -
+	// MARK: - NSCoding
 	
 	public func encode(with coder: NSCoder) {
 		coder.encode(self.isHumanPlayer, forKey: "human")

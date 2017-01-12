@@ -24,7 +24,7 @@ public class WWActionData: NSObject, NSCoding {
 		self.secondSelection = second
 	}
 	
-	// MARK: NSCoding -
+	// MARK: - NSCoding
 	
 	public func encode(with coder: NSCoder) {
 		if self.firstSelection == nil {

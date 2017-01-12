@@ -73,7 +73,7 @@ class GameClient: GameController {
 		MultipeerCommunication.shared.sendToHost(message: data)
 	}
 	
-	// MARK: MCDelegate -
+	// MARK: - MCDelegate
 	
 	func connected(device: String) {
 		// Newly connected, so send device name to host

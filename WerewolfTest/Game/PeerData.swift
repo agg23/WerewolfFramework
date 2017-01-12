@@ -46,7 +46,7 @@ class PeerData: NSObject, NSCoding {
 		self.state = nil
 	}
 	
-	// MARK: NSCoding -
+	// MARK: - NSCoding
 	
 	func encode(with coder: NSCoder) {
 		coder.encode(self.command.rawValue, forKey: "command")

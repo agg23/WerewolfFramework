@@ -26,7 +26,7 @@ public class WWAction: NSObject, NSCoding {
 		self.actions = actions
 	}
 	
-	// MARK: NSCoding -
+	// MARK: - NSCoding
 	
 	public func encode(with coder: NSCoder) {
 		coder.encode(self.actions, forKey: "actions")
