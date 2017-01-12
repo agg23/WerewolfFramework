@@ -57,12 +57,10 @@ class GameHost: GameController {
 		sendAllStatus()
 		
 		// TODO: Should have confirmation, but instead jumps straight to night
-		Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (timer) in
-			self.startNight()
-		}
+		Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(startNight), userInfo: nil, repeats: false)
 	}
 	
-	func startNight() {
+	@objc func startNight() {
 		self.game.startNight()
 		
 		sendAllStatus()
