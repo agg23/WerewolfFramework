@@ -112,7 +112,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	@IBAction func hostPressed(_ sender: Any) {
 		MultipeerCommunication.shared.startBrowser()
 		
-		self.host = GameHost(client: self.client!)
+		if self.host == nil {
+			self.host = GameHost(client: self.client!)
+		}
 		
 		self.startGameButton.isEnabled = true
 		self.endGameButton.isEnabled = true
