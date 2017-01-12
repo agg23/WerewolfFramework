@@ -83,8 +83,11 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 	
 	func startBrowser() {
 		self.isHost = true
-		self.browserViewController = MCBrowserViewController(browser: self.browser, session: self.session)
-		self.browserViewController?.delegate = self
+		
+		if self.browserViewController == nil {
+			self.browserViewController = MCBrowserViewController(browser: self.browser, session: self.session)
+			self.browserViewController?.delegate = self
+		}
 		self.viewController?.present(self.browserViewController!, animated: true) {
 			self.browser.startBrowsingForPeers()
 		}
