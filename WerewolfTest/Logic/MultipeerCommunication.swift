@@ -130,10 +130,6 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 	// MARK: - MCSessionDelegate
 	
 	func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-//		DispatchQueue.main.async {
-//			NotificationCenter.default.post(name: .MessageReceived, object: data)
-//		}
-		
 		self.delegate?.messageReceived(data: data, from: peerID.displayName)
 		
 		if let string = String(data: data, encoding: .utf8) {
@@ -203,16 +199,11 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { _ in
 			invitationHandler(false, nil)
 		}
-		let blockAction = UIAlertAction(title: NSLocalizedString("Block", comment: ""), style: .destructive) { [weak self] _ in
-			self?.blockedPeers.append(peerID)
-			invitationHandler(false, nil)
-		}
 		let acceptAction = UIAlertAction(title: NSLocalizedString("Accept", comment: ""), style: .default) { _ in
 			invitationHandler(true, self.session)
 		}
 		
 		alertController.addAction(cancelAction)
-		alertController.addAction(blockAction)
 		alertController.addAction(acceptAction)
 		self.viewController?.present(alertController, animated: true, completion: nil)
 	}
@@ -236,11 +227,13 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 	func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
 		print("Browser view controller finished")
 		self.browserViewController?.dismiss(animated: true, completion: nil)
+		self.browser.stopBrowsingForPeers()
 	}
 	
 	func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
 		print("Browser view controller canceled")
 		self.browserViewController?.dismiss(animated: true, completion: nil)
+		self.browser.stopBrowsingForPeers()
 	}
 	
 	func browserViewController(_ browserViewController: MCBrowserViewController, shouldPresentNearbyPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) -> Bool {
