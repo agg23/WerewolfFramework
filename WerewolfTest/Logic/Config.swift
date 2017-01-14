@@ -12,6 +12,8 @@ public extension Notification.Name {
 	static let deviceConnected = Notification.Name("deviceConnected")
 	static let deviceDisconnected = Notification.Name("deviceDisconnected")
 	
+	static let deviceConnectionRequest = Notification.Name("deviceConnectionRequest")
+	
 	static let messageReceived = Notification.Name("messageReceived")
 	
 	static let stateUpdate = Notification.Name("stateUpdate")

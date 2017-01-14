@@ -43,6 +43,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			self.gameStatusLabel.text = "Disconnected"
 		}
 		
+		NotificationCenter.default.addObserver(forName: .deviceConnectionRequest, object: nil, queue: nil) { (notification) in
+			guard let alertController = notification.object as? UIAlertController else {
+				print("[ERROR] Invalid object for device connection")
+				return
+			}
+			
+			alertController.popoverPresentationController?.sourceView = self.startAdvertisingButton
+			alertController.popoverPresentationController?.sourceRect = self.startAdvertisingButton.bounds
+			self.present(alertController, animated: true, completion: nil)
+		}
+		
 		MultipeerCommunication.shared.viewController = self
 		
 		self.client = GameClient()

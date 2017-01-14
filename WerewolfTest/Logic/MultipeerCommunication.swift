@@ -208,7 +208,8 @@ class MultipeerCommunication: NSObject, MCNearbyServiceAdvertiserDelegate, MCNea
 		
 		alertController.addAction(cancelAction)
 		alertController.addAction(acceptAction)
-		self.viewController?.present(alertController, animated: true, completion: nil)
+		
+		NotificationCenter.default.post(name: .deviceConnectionRequest, object: alertController)
 	}
 	
 	// MARK: - MCNearbyServiceBrowserDelegate
