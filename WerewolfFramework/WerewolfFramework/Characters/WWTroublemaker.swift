@@ -36,6 +36,6 @@ public class WWTroublemaker: WWCharacter {
 	public override func received(action: WWAction, state: WWState) -> Bool {
 		self.selectionComplete = true
 		
-		return false
+		return true
 	}
 }
