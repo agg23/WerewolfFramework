@@ -229,6 +229,8 @@ public class WWCharacter: NSObject, NSCoding {
 			return WWMason.self
 		case "WWInsomniac":
 			return WWInsomniac.self
+		case "WWCopycat":
+			return WWCopycat.self
 		default:
 			return nil
 		}
@@ -251,6 +253,8 @@ public class WWCharacter: NSObject, NSCoding {
 			return "WWMason"
 		} else if characterClass == WWInsomniac.self {
 			return "WWInsomniac"
+		} else if characterClass == WWCopycat.self {
+			return "WWCopycat"
 		}
 		
 		return ""

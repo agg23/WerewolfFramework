@@ -186,6 +186,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		if character?.interactionCount == 0 {
 			self.tableView.allowsSelection = false
 		} else {
+			self.tableView.allowsSelection = true
 			self.tableView.allowsMultipleSelection = true
 		}
 		
