@@ -44,6 +44,22 @@ public class WWCharacter: NSObject, NSCoding {
 	
 	public var instructions: String
 	
+	public override required init() {
+		self.name = "WWCharacter"
+		self.turnOrder = .concurrent
+		self.orderNumber = -1
+		self.instructions = "Instructions"
+		self.selectable = .none
+		self.canSelectSelf = false
+		self.interactionCount = 0
+		self.defaultVisible = []
+		self.defaultViewable = .none
+		
+		self.selectionComplete = false
+		
+		self.seenAssignments = [Int: String]()
+	}
+	
 	public init(name: String, instructions: String, turnOrder: TurnOrder, orderNumber: Int, selectable: Viewable, interactionCount: Int, canSelectSelf: Bool, defaultVisible: [WWCharacter.Type], defaultViewable: Viewable) {
 		self.name = name
 		self.turnOrder = turnOrder
@@ -258,5 +274,9 @@ public class WWCharacter: NSObject, NSCoding {
 		}
 		
 		return ""
+	}
+	
+	static func instantiate<T: WWCharacter>(classType: T.Type) -> WWCharacter {
+		return classType.init()
 	}
 }

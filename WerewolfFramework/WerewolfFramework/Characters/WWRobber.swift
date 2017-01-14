@@ -9,7 +9,7 @@
 import Foundation
 
 public class WWRobber: WWCharacter {
-	public init() {
+	public required init() {
 		super.init(name: "Robber", instructions: "I am a Robber", turnOrder: .concurrent, orderNumber: 19, selectable: .humanOnly, interactionCount: 1, canSelectSelf: false, defaultVisible: [], defaultViewable: .none)
 		self.selectionComplete = true
 	}

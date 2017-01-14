@@ -9,7 +9,7 @@
 import Foundation
 
 public class WWWerewolf: WWCharacter {
-	public init() {
+	public required init() {
 		super.init(name: "Werewolf", instructions: "I am a Werewolf", turnOrder: .concurrent, orderNumber: 1, selectable: .nonHumanOnly, interactionCount: 0, canSelectSelf: false, defaultVisible: [WWWerewolf.self], defaultViewable: .humanOnly)
 	}
 	

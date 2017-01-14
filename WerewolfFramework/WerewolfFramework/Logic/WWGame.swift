@@ -21,6 +21,7 @@ public class WWGame {
 		return self.players + self.nonHumanPlayers
 	}
 	
+	public var characterTypes: [WWCharacter.Type]
 	public var characters: [WWCharacter]
 	
 	public var nightCanEnd: Bool
@@ -33,6 +34,7 @@ public class WWGame {
 		self.players = [WWPlayer]()
 		self.nonHumanPlayers = [WWPlayer]()
 		
+		self.characterTypes = [WWCharacter.Type]()
 		self.characters = [WWCharacter]()
 		
 		self.nightCanEnd = false
@@ -43,6 +45,7 @@ public class WWGame {
 	public func resetGame() {
 		self.nonHumanPlayers = [WWPlayer]()
 		
+		self.characterTypes = [WWCharacter.Type]()
 		self.characters = [WWCharacter]()
 		
 		self.actions = [WWPlayer: WWAction]()
@@ -50,18 +53,21 @@ public class WWGame {
 	}
 	
 	public func generateRound() {
-		if self.characters.count != self.players.count + self.nonHumanPlayers.count {
+		if self.characterTypes.count != self.players.count + self.nonHumanPlayers.count {
 			print("[ERROR] Cannot generate round when the number of characters and players does not equal")
 		}
 		
-		let shuffledCharacters = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: self.characters) as! [WWCharacter]
+		let shuffledCharacterTypes = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: self.characterTypes) as! [WWCharacter.Type]
 		
 		var assignments = [Int: WWCharacter]()
 		
-		for i in 0 ..< shuffledCharacters.count {
-			let character = shuffledCharacters[i]
+		for i in 0 ..< shuffledCharacterTypes.count {
+			let characterType = shuffledCharacterTypes[i]
+			
+			let character = WWCharacter.instantiate(classType: characterType)
 			
 			assignments[i] = character
+			self.characters.append(character)
 		}
 		
 		self.state = WWState(players: self.allPlayers, characters: self.characters, assignments: assignments)
@@ -291,13 +297,13 @@ public class WWGame {
 		}
 	}
 	
-	public func register(character: WWCharacter) {
-		self.characters.append(character)
+	public func register(character: WWCharacter.Type) {
+		self.characterTypes.append(character)
 	}
 	
-	public func remove(character: WWCharacter) {
+	public func remove(character: WWCharacter.Type) {
 		for i in 0 ..< self.characters.count {
-			if self.characters[i] == character {
+			if self.characterTypes[i] == character {
 				self.characters.remove(at: i)
 				return
 			}

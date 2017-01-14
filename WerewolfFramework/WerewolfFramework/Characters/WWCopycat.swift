@@ -12,7 +12,7 @@ public class WWCopycat: WWCharacter {
 	
 	private var inheritedCharacter: WWCharacter?
 	
-	public init() {
+	public required init() {
 		super.init(name: "Copycat", instructions: "I am a Copycat", turnOrder: .concurrent, orderNumber: 0, selectable: .nonHumanOnly, interactionCount: 1, canSelectSelf: false, defaultVisible: [], defaultViewable: .none)
 		self.selectionComplete = true
 	}

@@ -9,7 +9,7 @@
 import Foundation
 
 public class WWMinion: WWCharacter {
-	public init() {
+	public required init() {
 		super.init(name: "Minion", instructions: "I am a Minion", turnOrder: .concurrent, orderNumber: 2, selectable: .none, interactionCount: 0, canSelectSelf: false, defaultVisible: [WWWerewolf.self], defaultViewable: .humanOnly)
 		self.selectionComplete = true
 	}

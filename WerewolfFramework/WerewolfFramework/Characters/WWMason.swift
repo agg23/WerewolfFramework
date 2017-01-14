@@ -9,7 +9,7 @@
 import Foundation
 
 public class WWMason: WWCharacter {
-	public init() {
+	public required init() {
 		super.init(name: "Mason", instructions: "I am a Mason", turnOrder: .concurrent, orderNumber: 3, selectable: .none, interactionCount: 0, canSelectSelf: false, defaultVisible: [WWMason.self], defaultViewable: .humanOnly)
 		self.selectionComplete = true
 	}

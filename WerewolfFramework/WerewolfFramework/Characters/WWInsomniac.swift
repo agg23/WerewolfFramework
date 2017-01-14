@@ -9,7 +9,7 @@
 import Foundation
 
 public class WWInsomniac: WWCharacter {
-	public init() {
+	public required init() {
 		super.init(name: "Insomniac", instructions: "I am an Insomniac", turnOrder: .last, orderNumber: 10000, selectable: .none, interactionCount: 0, canSelectSelf: false, defaultVisible: [], defaultViewable: .none)
 		self.selectionComplete = true
 	}

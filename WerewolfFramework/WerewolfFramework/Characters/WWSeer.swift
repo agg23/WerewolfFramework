@@ -9,7 +9,7 @@
 import Foundation
 
 public class WWSeer: WWCharacter {
-	public init() {
+	public required init() {
 		super.init(name: "Seer", instructions: "I am a Seer", turnOrder: .concurrent, orderNumber: 10, selectable: .nonHumanOnly, interactionCount: 2, canSelectSelf: false, defaultVisible: [], defaultViewable: .none)
 	}
 	

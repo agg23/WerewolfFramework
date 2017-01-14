@@ -12,7 +12,7 @@ public class WWPI: WWCharacter {
 	
 	public var firstCharacterSelect: Bool
 	
-	public init() {
+	public required init() {
 		self.firstCharacterSelect = false
 		
 		super.init(name: "PI", instructions: "I am a Paranormal Investigator", turnOrder: .concurrent, orderNumber: 18, selectable: .humanOnly, interactionCount: 1, canSelectSelf: false, defaultVisible: [], defaultViewable: .none)

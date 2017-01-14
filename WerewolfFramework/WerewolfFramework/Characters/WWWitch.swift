@@ -11,7 +11,7 @@ import Foundation
 public class WWWitch: WWCharacter {
 	private var humanPlayerSelect: Bool
 	
-	public init() {
+	public required init() {
 		self.humanPlayerSelect = false
 		
 		super.init(name: "Witch", instructions: "I am a Witch", turnOrder: .concurrent, orderNumber: 20, selectable: .nonHumanOnly, interactionCount: 1, canSelectSelf: true, defaultVisible: [], defaultViewable: .none)
