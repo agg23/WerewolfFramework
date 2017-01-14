@@ -63,12 +63,12 @@ public class WWCharacter: NSObject, NSCoding {
 	/**
 		Interprets the provided WWAction (typically created from the GUI) and mutates the WWState
 	*/
-	public func perform(action: WWAction, with state: WWState) {
+	public func perform(action: WWAction, with state: WWState, playerIndex: Int) {
 		print("[WARNING] Default action performed. Nothing was changed")
 	}
 	
 	/**
-		Performs any changes dictated by the current WWState, such as a solo Werewolf adding a selectable
+		Performs any changes dictated by the current WWState before entering night, such as a solo Werewolf adding a selectable
 	*/
 	public func beginNight(with state: WWState) {
 		self.selectionComplete = false
@@ -77,10 +77,19 @@ public class WWCharacter: NSObject, NSCoding {
 	}
 	
 	/**
+		Performs any changes dictated by the current WWState before entering discussion, such as Insomniac updating their roll
+	*/
+	public func beginDiscussion(with state: WWState, playerIndex: Int) {
+		
+	}
+	
+	/**
 		Performs any necessary changes based on the provided WWAction. Returns true if updated state needs to be sent to the owning client
 	*/
 	public func received(action: WWAction, state: WWState) -> Bool {
-		return false
+		self.selectionComplete = true
+		
+		return true
 	}
 	
 	public func selectable(player: WWPlayer) -> Bool {
@@ -218,6 +227,8 @@ public class WWCharacter: NSObject, NSCoding {
 			return WWPI.self
 		case "WWMason":
 			return WWMason.self
+		case "WWInsomniac":
+			return WWInsomniac.self
 		default:
 			return nil
 		}
@@ -238,6 +249,8 @@ public class WWCharacter: NSObject, NSCoding {
 			return "WWPI"
 		} else if characterClass == WWMason.self {
 			return "WWMason"
+		} else if characterClass == WWInsomniac.self {
+			return "WWInsomniac"
 		}
 		
 		return ""

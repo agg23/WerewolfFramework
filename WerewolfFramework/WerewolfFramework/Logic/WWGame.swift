@@ -141,7 +141,9 @@ public class WWGame {
 			return char1!.orderNumber < char2!.orderNumber
 		}
 		
-		for player in sortedPlayers {
+		// Perform character actions
+		for i in 0 ..< sortedPlayers.count {
+			let player = sortedPlayers[i]
 			let action = self.actions[player]
 			
 			if action == nil {
@@ -157,7 +159,19 @@ public class WWGame {
 				print("[ERROR] WWAction with invalid player")
 				continue
 			}
-			character.perform(action: action!, with: state)
+			
+			character.perform(action: action!, with: state, playerIndex: i)
+		}
+		
+		for i in 0 ..< sortedPlayers.count {
+			let player = sortedPlayers[i]
+			
+			guard let character = playerAssignments[player] else {
+				print("[ERROR] WWAction with invalid player")
+				continue
+			}
+			
+			character.beginDiscussion(with: state, playerIndex: i)
 		}
 		
 		var array = [WWPlayer]()

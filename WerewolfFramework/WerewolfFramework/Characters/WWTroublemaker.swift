@@ -17,7 +17,7 @@ public class WWTroublemaker: WWCharacter {
 		super.init(coder: decoder)
 	}
 	
-	override public func perform(action: WWAction, with state: WWState) {
+	public override func perform(action: WWAction, with state: WWState, playerIndex: Int) {
 		print("Overridden Troublemaker action!")
 		
 		guard let actionData = action.lastAction else {
@@ -31,11 +31,5 @@ public class WWTroublemaker: WWCharacter {
 		}
 		
 		state.swap(first: first, second: second)
-	}
-	
-	public override func received(action: WWAction, state: WWState) -> Bool {
-		self.selectionComplete = true
-		
-		return true
 	}
 }

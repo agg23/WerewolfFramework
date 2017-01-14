@@ -1,5 +1,5 @@
 //
-//  WWMason.swift
+//  WWInsomniac.swift
 //  WerewolfFramework
 //
 //  Created by Adam Gastineau on 1/14/17.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class WWMason: WWCharacter {
+public class WWInsomniac: WWCharacter {
 	public init() {
-		super.init(name: "Mason", instructions: "I am a Mason", turnOrder: .concurrent, orderNumber: 3, selectable: .none, interactionCount: 0, canSelectSelf: false, defaultVisible: [WWMason.self], defaultViewable: .humanOnly)
+		super.init(name: "Insomniac", instructions: "I am an Insomniac", turnOrder: .last, orderNumber: 10000, selectable: .none, interactionCount: 0, canSelectSelf: false, defaultVisible: [], defaultViewable: .none)
 		self.selectionComplete = true
 	}
 	
@@ -21,9 +21,5 @@ public class WWMason: WWCharacter {
 	public override func beginNight(with state: WWState) {
 		// For some reason necessary
 		self.selectionComplete = true
-	}
-	
-	public override func perform(action: WWAction, with state: WWState, playerIndex: Int) {
-		print("Overridden Mason action!")
 	}
 }

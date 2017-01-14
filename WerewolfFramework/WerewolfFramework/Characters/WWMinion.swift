@@ -23,7 +23,7 @@ public class WWMinion: WWCharacter {
 		self.selectionComplete = true
 	}
 	
-	override public func perform(action: WWAction, with state: WWState) {
+	public override func perform(action: WWAction, with state: WWState, playerIndex: Int) {
 		print("Overridden Minion action!")
 	}
 }

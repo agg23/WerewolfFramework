@@ -17,7 +17,7 @@ public class WWWerewolf: WWCharacter {
 		super.init(coder: decoder)
 	}
 	
-	override public func perform(action: WWAction, with state: WWState) {
+	public override func perform(action: WWAction, with state: WWState, playerIndex: Int) {
 		print("Overridden Werewolf action!")
 	}
 	

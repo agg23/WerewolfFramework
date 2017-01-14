@@ -18,7 +18,7 @@ public class WWRobber: WWCharacter {
 		super.init(coder: decoder)
 	}
 	
-	override public func perform(action: WWAction, with state: WWState) {
+	public override func perform(action: WWAction, with state: WWState, playerIndex: Int) {
 		let firstActionData = action.actions[0]
 		
 		guard let first = firstActionData.firstSelection else {
