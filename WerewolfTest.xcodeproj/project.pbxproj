@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6647C4E81E218EF100650FFF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647C4E71E218EF100650FFF /* Config.swift */; };
+		6666FA581E2AEC5E0096BE12 /* CharacterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6666FA571E2AEC5E0096BE12 /* CharacterSelectViewController.swift */; };
+		6666FA5B1E2AEDC60096BE12 /* CharacterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6666FA5A1E2AEDC60096BE12 /* CharacterCollectionViewCell.swift */; };
 		66BD2AF31E213B8C00A6343E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BD2AF21E213B8C00A6343E /* AppDelegate.swift */; };
 		66BD2AF51E213B8C00A6343E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BD2AF41E213B8C00A6343E /* ViewController.swift */; };
 		66BD2AF81E213B8C00A6343E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66BD2AF61E213B8C00A6343E /* Main.storyboard */; };
@@ -58,6 +60,8 @@
 /* Begin PBXFileReference section */
 		6647C4E71E218EF100650FFF /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Logic/Config.swift; sourceTree = "<group>"; };
 		6647C4FE1E21938900650FFF /* WerewolfFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WerewolfFramework.xcodeproj; path = WerewolfFramework/WerewolfFramework.xcodeproj; sourceTree = "<group>"; };
+		6666FA571E2AEC5E0096BE12 /* CharacterSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CharacterSelectViewController.swift; path = ViewControllers/CharacterSelectViewController.swift; sourceTree = "<group>"; };
+		6666FA5A1E2AEDC60096BE12 /* CharacterCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CharacterCollectionViewCell.swift; path = Views/CharacterCollectionViewCell.swift; sourceTree = "<group>"; };
 		66BD2AEF1E213B8C00A6343E /* WerewolfTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WerewolfTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66BD2AF21E213B8C00A6343E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66BD2AF41E213B8C00A6343E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +99,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6666FA591E2AEDAE0096BE12 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6666FA5A1E2AEDC60096BE12 /* CharacterCollectionViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		66BD2AE61E213B8C00A6343E = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +130,7 @@
 				66BD2AF21E213B8C00A6343E /* AppDelegate.swift */,
 				66BD2AF41E213B8C00A6343E /* ViewController.swift */,
 				66E7B1E91E228D4500A4B8BD /* ViewControllers */,
+				6666FA591E2AEDAE0096BE12 /* Views */,
 				66E7B1D51E22889800A4B8BD /* Game */,
 				66BD2B071E213C0500A6343E /* Logic */,
 				66BD2AF61E213B8C00A6343E /* Main.storyboard */,
@@ -161,6 +174,7 @@
 		66E7B1E91E228D4500A4B8BD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6666FA571E2AEC5E0096BE12 /* CharacterSelectViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -267,8 +281,10 @@
 				66BD2B091E213C2100A6343E /* MultipeerCommunication.swift in Sources */,
 				66E7B1FA1E22C7AC00A4B8BD /* GameController.swift in Sources */,
 				66E7B1F81E22C74A00A4B8BD /* GameClient.swift in Sources */,
+				6666FA5B1E2AEDC60096BE12 /* CharacterCollectionViewCell.swift in Sources */,
 				66E7B1F11E2292E000A4B8BD /* PeerData.swift in Sources */,
 				66E7B1EF1E22919900A4B8BD /* MCDelegate.swift in Sources */,
+				6666FA581E2AEC5E0096BE12 /* CharacterSelectViewController.swift in Sources */,
 				66BD2AF31E213B8C00A6343E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

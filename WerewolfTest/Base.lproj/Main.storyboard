@@ -105,6 +105,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rEY-9c-jl6">
+                                <rect key="frame" x="164" y="2" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgZ-Kg-HeX">
+                                <rect key="frame" x="337" y="587" width="22" height="22"/>
+                                <connections>
+                                    <segue destination="DTV-Ld-ed6" kind="presentation" id="Zkb-Z7-Fwg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -119,6 +130,7 @@
                             <constraint firstItem="kBd-kD-q3F" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="Raz-sE-lsm"/>
                             <constraint firstItem="FsH-IM-Idv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rrq-ny-Xg6"/>
                             <constraint firstItem="BDa-oi-hkm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sra-YA-tlv"/>
+                            <constraint firstItem="rKB-Wc-B0q" firstAttribute="top" secondItem="tgZ-Kg-HeX" secondAttribute="bottom" constant="8" id="XbC-U9-FUj"/>
                             <constraint firstItem="rKB-Wc-B0q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ZIb-nJ-V5v"/>
                             <constraint firstItem="i1R-SE-dMt" firstAttribute="top" secondItem="cyL-8f-2kL" secondAttribute="bottom" constant="8" id="ZNl-OH-TB4"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Rzt-ei-1hK" secondAttribute="leading" id="cGK-c3-o28"/>
@@ -130,6 +142,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="cyL-8f-2kL" secondAttribute="leading" id="k0n-mF-YOp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rKB-Wc-B0q" secondAttribute="trailing" id="leM-9v-7PH"/>
                             <constraint firstItem="i1R-SE-dMt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nMh-8I-fwX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tgZ-Kg-HeX" secondAttribute="trailing" id="s6j-qM-tfm"/>
                         </constraints>
                     </view>
                     <connections>
@@ -147,6 +160,67 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="116" y="123.68815592203899"/>
+        </scene>
+        <!--Character Select View Controller-->
+        <scene sceneID="nwg-ey-xKB">
+            <objects>
+                <collectionViewController id="DTV-Ld-ed6" customClass="CharacterSelectViewController" customModule="WerewolfTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="icf-G7-Yx2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tG9-Go-yTC">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <view key="backgroundView" contentMode="scaleToFill" id="HdK-c4-uzN">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LG2-hI-vEa">
+                                    <rect key="frame" x="170" y="629" width="34" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Back"/>
+                                    <connections>
+                                        <action selector="backPressed:" destination="DTV-Ld-ed6" eventType="touchUpInside" id="KhU-Qn-YIL"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="JYv-qc-U1P" customClass="CharacterCollectionViewCell" customModule="WerewolfTest" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wys-j5-h5Z">
+                                            <rect key="frame" x="4" y="15" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <connections>
+                                    <outlet property="label" destination="Wys-j5-h5Z" id="BPd-Uq-bgX"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="DTV-Ld-ed6" id="574-PY-0Hp"/>
+                            <outlet property="delegate" destination="DTV-Ld-ed6" id="bOa-KW-rFo"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xc6-eN-Q93" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="844" y="124"/>
         </scene>
     </scenes>
 </document>
