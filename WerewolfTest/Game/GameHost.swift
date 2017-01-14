@@ -35,7 +35,7 @@ class GameHost: GameController {
 		
 		self.game.registerNonHumanPlayers(count: 3)
 		
-		let characters = [WWWerewolf(), WWWerewolf(), WWMinion(), WWRobber(), WWWitch(), WWSeer(), WWTroublemaker(), WWPI()]
+		let characters = [WWWerewolf(), WWWerewolf(), WWMinion(), WWRobber(), WWWitch(), WWSeer(), WWTroublemaker(), WWPI(), WWMason(), WWMason()]
 		
 		for i in 0 ..< self.game.players.count + self.game.nonHumanPlayers.count {
 			self.game.register(character: characters[i])
@@ -63,10 +63,14 @@ class GameHost: GameController {
 	@objc func startNight() {
 		self.game.startNight()
 		
+		if self.game.nightCanEnd {
+			Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(startDiscussion), userInfo: nil, repeats: false)
+		}
+		
 		sendAllStatus()
 	}
 	
-	func startDiscussion() {
+	@objc func startDiscussion() {
 		self.game.setDiscussionStatus()
 		
 		sendAllStatus()

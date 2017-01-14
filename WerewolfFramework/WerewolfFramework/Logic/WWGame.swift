@@ -93,10 +93,31 @@ public class WWGame {
 		for character in self.characters {
 			character.beginNight(with: state)
 		}
+		
+		let _ = checkNightCanEnd()
 	}
 	
 	public func setDiscussionStatus() {
 		state?.status = .discussion
+	}
+	
+	public func checkNightCanEnd() -> Bool {
+		guard let state = self.state else {
+			print("[ERROR] Cannot check for night end. No state exists")
+			return false
+		}
+		
+		var endNight = true
+		
+		for (playerIndex, loopCharacter) in state.assignments {
+			if self.allPlayers[playerIndex].isHumanPlayer {
+				endNight = endNight && loopCharacter.selectionComplete
+			}
+		}
+		
+		self.nightCanEnd = endNight
+		
+		return endNight
 	}
 	
 	/**
@@ -196,15 +217,7 @@ public class WWGame {
 		
 		self.actions[player] = finalAction
 		
-		var endNight = true
-		
-		for (playerIndex, loopCharacter) in state.assignments {
-			if self.allPlayers[playerIndex].isHumanPlayer {
-				endNight = endNight && loopCharacter.selectionComplete
-			}
-		}
-		
-		self.nightCanEnd = endNight
+		let _ = checkNightCanEnd()
 		
 		return shouldUpdate
 	}

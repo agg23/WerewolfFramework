@@ -214,6 +214,10 @@ public class WWCharacter: NSObject, NSCoding {
 			return WWWitch.self
 		case "WWTroublemaker":
 			return WWTroublemaker.self
+		case "WWPI":
+			return WWPI.self
+		case "WWMason":
+			return WWMason.self
 		default:
 			return nil
 		}
@@ -230,6 +234,10 @@ public class WWCharacter: NSObject, NSCoding {
 			return "WWWitch"
 		} else if characterClass == WWTroublemaker.self {
 			return "WWTroublemaker"
+		} else if characterClass == WWPI.self {
+			return "WWPI"
+		} else if characterClass == WWMason.self {
+			return "WWMason"
 		}
 		
 		return ""
