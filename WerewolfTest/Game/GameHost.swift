@@ -17,12 +17,16 @@ class GameHost: GameController {
 	
 	var seenPlayerIDs: [String]
 	
+	var enabledCharacters: [WWCharacter.Type]
+	
 	init(client: GameClient) {
 		self.game = WWGame(name: "Default Game")
 		
 		self.hostClient = client
 		
 		self.seenPlayerIDs = Array()
+		
+		self.enabledCharacters = [WWWerewolf.self, WWWerewolf.self, WWMinion.self, WWWitch.self, WWSeer.self, WWTroublemaker.self, WWPI.self, WWInsomniac.self, WWCopycat.self, WWMason.self, WWMason.self]
 		
 		self.hostClient.gameHost = self
 		MultipeerCommunication.shared.delegate = self
@@ -35,10 +39,13 @@ class GameHost: GameController {
 		
 		self.game.registerNonHumanPlayers(count: 3)
 		
-		let characters: [WWCharacter.Type] = [WWWerewolf.self, WWWerewolf.self, WWMinion.self, WWWitch.self, WWSeer.self, WWTroublemaker.self, WWPI.self, WWInsomniac.self, WWCopycat.self, WWMason.self, WWMason.self]
+		if self.game.players.count + self.game.nonHumanPlayers.count > self.enabledCharacters.count {
+			print("[ERROR] Not enough characters to start the game")
+			return
+		}
 		
 		for i in 0 ..< self.game.players.count + self.game.nonHumanPlayers.count {
-			self.game.register(character: characters[i])
+			self.game.register(character: self.enabledCharacters[i])
 		}
 		
 		self.game.generateRound()
@@ -94,6 +101,21 @@ class GameHost: GameController {
 		sendAllStatus()
 		
 		self.game.cancelGame()
+	}
+	
+	// MARK: - Character Setup
+	
+	func register(character: WWCharacter.Type) {
+		self.enabledCharacters.append(character)
+	}
+	
+	func remove(character: WWCharacter.Type) {
+		for i in 0 ..< self.enabledCharacters.count {
+			if self.enabledCharacters[i] == character {
+				self.enabledCharacters.remove(at: i)
+				return
+			}
+		}
 	}
 	
 	// MARK: - Host Player

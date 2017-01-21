@@ -105,10 +105,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgZ-Kg-HeX">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgZ-Kg-HeX">
                                 <rect key="frame" x="337" y="587" width="22" height="22"/>
                                 <connections>
-                                    <segue destination="DTV-Ld-ed6" kind="presentation" id="Zkb-Z7-Fwg"/>
+                                    <segue destination="DTV-Ld-ed6" kind="presentation" identifier="characterSelectSegue" id="Zkb-Z7-Fwg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -193,15 +193,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wys-j5-h5Z">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wys-j5-h5Z">
                                             <rect key="frame" x="4" y="15" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Wys-j5-h5Z" secondAttribute="bottom" constant="6" id="Jjc-wA-xdq"/>
+                                    <constraint firstItem="Wys-j5-h5Z" firstAttribute="leading" secondItem="JYv-qc-U1P" secondAttribute="leadingMargin" constant="-4" id="S65-Ig-af8"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Wys-j5-h5Z" secondAttribute="trailing" constant="-4" id="fzg-B5-iiW"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="label" destination="Wys-j5-h5Z" id="BPd-Uq-bgX"/>
                                 </connections>

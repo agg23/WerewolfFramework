@@ -276,6 +276,12 @@ public class WWCharacter: NSObject, NSCoding {
 		return ""
 	}
 	
+	public static func name(type: WWCharacter.Type) -> String {
+		// TODO: Fix
+		let character = instantiate(classType: type)
+		return character.name
+	}
+	
 	static func instantiate<T: WWCharacter>(classType: T.Type) -> WWCharacter {
 		return classType.init()
 	}

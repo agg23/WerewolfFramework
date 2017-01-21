@@ -210,6 +210,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		}
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "characterSelectSegue" {
+			let characterSelectViewController = segue.destination as! CharacterSelectViewController
+			characterSelectViewController.host = self.host
+		}
+	}
+	
 	// MARK: - UITableViewDelegate
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
