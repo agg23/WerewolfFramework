@@ -214,6 +214,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		if segue.identifier == "characterSelectSegue" {
 			let characterSelectViewController = segue.destination as! CharacterSelectViewController
 			characterSelectViewController.host = self.host
+			characterSelectViewController.client = self.client
 		}
 	}
 	

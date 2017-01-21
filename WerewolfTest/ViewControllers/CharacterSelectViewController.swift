@@ -12,24 +12,28 @@ import WerewolfFramework
 class CharacterSelectViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 	let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
 	var host: GameHost?
+	var client: GameClient?
 	var initialLoad = true
 	
 	let availableCharacters: [WWCharacter.Type] = [WWWerewolf.self, WWWerewolf.self, WWMinion.self, WWWitch.self, WWSeer.self, WWTroublemaker.self, WWPI.self, WWInsomniac.self, WWCopycat.self, WWMason.self, WWMason.self]
 	
-	var enabledCharacters: [WWCharacter.Type]?
+	var enabledCharacters = [WWCharacter.Type]()
 	
 	override func viewDidLoad() {
 		self.collectionView?.allowsMultipleSelection = true
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		guard let host = self.host else {
-			print("No host")
-			return
-		}
-		
 		// Temporarily store registered characters (for processing duplicates)
-		self.enabledCharacters = host.enabledCharacters
+		if let host = self.host {
+			self.enabledCharacters = host.enabledCharacters
+		} else if let client = self.client, let state = client.state {
+			let characters = state.characters
+			
+			for character in characters {
+				self.enabledCharacters.append(type(of: character))
+			}
+		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -49,15 +53,15 @@ class CharacterSelectViewController: UICollectionViewController, UICollectionVie
 		cell.label.text = WWCharacter.name(type: type)
 		
 		// Select initial characters
-		if self.initialLoad, let characters = self.enabledCharacters {
-			for i in 0 ..< characters.count {
-				let characterType = characters[i]
+		if self.initialLoad {
+			for i in 0 ..< self.enabledCharacters.count {
+				let characterType = self.enabledCharacters[i]
 				if type == characterType {
 					cell.isSelected = true
 					collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .bottom)
 					cell.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
 					
-					self.enabledCharacters?.remove(at: i)
+					self.enabledCharacters.remove(at: i)
 					break
 				}
 			}
@@ -68,6 +72,14 @@ class CharacterSelectViewController: UICollectionViewController, UICollectionVie
 	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return self.availableCharacters.count
+	}
+	
+	override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+		return self.host != nil
+	}
+	
+	override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+		return self.host != nil
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
