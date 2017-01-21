@@ -15,7 +15,7 @@ class CharacterSelectViewController: UICollectionViewController, UICollectionVie
 	var client: GameClient?
 	var initialLoad = true
 	
-	let availableCharacters: [WWCharacter.Type] = [WWWerewolf.self, WWWerewolf.self, WWMinion.self, WWWitch.self, WWSeer.self, WWTroublemaker.self, WWPI.self, WWInsomniac.self, WWCopycat.self, WWMason.self, WWMason.self]
+	let availableCharacters: [WWCharacter.Type] = [WWCopycat.self, WWWerewolf.self, WWWerewolf.self, WWMinion.self, WWMason.self, WWMason.self, WWSeer.self, WWPI.self, WWRobber.self, WWWitch.self, WWTroublemaker.self, WWInsomniac.self]
 	
 	var enabledCharacters = [WWCharacter.Type]()
 	

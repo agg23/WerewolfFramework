@@ -26,7 +26,7 @@ class GameHost: GameController {
 		
 		self.seenPlayerIDs = Array()
 		
-		self.enabledCharacters = [WWWerewolf.self, WWWerewolf.self, WWMinion.self, WWWitch.self, WWSeer.self, WWTroublemaker.self, WWPI.self, WWInsomniac.self, WWCopycat.self, WWMason.self, WWMason.self]
+		self.enabledCharacters = [WWCopycat.self, WWWerewolf.self, WWWerewolf.self, WWMinion.self, WWMason.self, WWMason.self, WWSeer.self, WWPI.self, WWRobber.self, WWWitch.self, WWTroublemaker.self, WWInsomniac.self]
 		
 		self.hostClient.gameHost = self
 		MultipeerCommunication.shared.delegate = self
