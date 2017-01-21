@@ -26,6 +26,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	var client: GameClient?
 	
 	var lastSelectedIndex: Int = 0
+	
+	var confirmedSelections = Set<Int>()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -108,9 +110,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		case 0:
 			actions.append(WWActionData(first: nil, second: nil))
 		case 1:
-			actions.append(WWActionData(first: self.tableView.indexPathsForSelectedRows?[0].row, second: nil))
+			let first = self.tableView.indexPathsForSelectedRows![0].row
+			actions.append(WWActionData(first: first, second: nil))
+			self.confirmedSelections.formUnion([first])
 		case 2:
-			actions.append(WWActionData(first: self.tableView.indexPathsForSelectedRows?[0].row, second: self.tableView.indexPathsForSelectedRows?[1].row))
+			let first = self.tableView.indexPathsForSelectedRows![0].row
+			let second = self.tableView.indexPathsForSelectedRows![1].row
+			actions.append(WWActionData(first: first, second: second))
+			self.confirmedSelections.formUnion([first, second])
 		default:
 			break
 		}
@@ -163,6 +170,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			self.gameStatusLabel.text = "No Active Game"
 		case .starting:
 			self.gameStatusLabel.text = "Game Starting"
+			// Clear selections
+			self.confirmedSelections = Set<Int>()
 		case .night:
 			self.gameStatusLabel.text = "Night"
 		case .discussion:
@@ -253,6 +262,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		}
 
 		cell.textLabel?.text = state.players[indexPath.row].name + string
+		
+		if self.confirmedSelections.contains(indexPath.row) {
+			cell.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+		} else {
+			cell.backgroundColor = UIColor.white
+		}
 		
 		return cell
 	}
