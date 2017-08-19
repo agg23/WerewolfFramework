@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import GameplayKit
+// import GameplayKit
 
 public class WWGame {
 	public var name: String
@@ -57,7 +57,9 @@ public class WWGame {
 			print("[ERROR] Cannot generate round when the number of characters and players does not equal")
 		}
 		
-		let shuffledCharacterTypes = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: self.characterTypes) as! [WWCharacter.Type]
+		// let shuffledCharacterTypes = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: self.characterTypes) as! [WWCharacter.Type]
+        // TODO: Fix shuffling
+        let shuffledCharacterTypes = self.characterTypes
 		
 		var assignments = [Int: WWCharacter]()
 		

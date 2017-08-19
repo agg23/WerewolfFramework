@@ -24,8 +24,9 @@ public class WWCharacter: NSObject, NSCoding {
 	}
 	
 	public var name: String
-	public var image: UIImage?
-	
+    // TODO: Add
+//	public var image: UIImage?
+
 	public var turnOrder: TurnOrder
 	public var orderNumber: Int = -1
 	

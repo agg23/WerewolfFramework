@@ -11,6 +11,24 @@
 		6620DC651E2AB9A4008D309C /* WWInsomniac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6620DC641E2AB9A4008D309C /* WWInsomniac.swift */; };
 		6647C4F81E21938900650FFF /* WerewolfFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6647C4F61E21938900650FFF /* WerewolfFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6666FA561E2AC4FD0096BE12 /* WWCopycat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6666FA551E2AC4FD0096BE12 /* WWCopycat.swift */; };
+		6667932F1F478FC000C81558 /* WerewolfFramework_Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 6667932D1F478FC000C81558 /* WerewolfFramework_Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		666793351F47903900C81558 /* WWCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE901E2195FA0075E277 /* WWCharacter.swift */; };
+		666793361F47903900C81558 /* WWCopycat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6666FA551E2AC4FD0096BE12 /* WWCopycat.swift */; };
+		666793371F47903900C81558 /* WWWerewolf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1EA1E228E1D00A4B8BD /* WWWerewolf.swift */; };
+		666793381F47903900C81558 /* WWMinion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1EC1E228E5500A4B8BD /* WWMinion.swift */; };
+		666793391F47903900C81558 /* WWMason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6620DC621E2AB271008D309C /* WWMason.swift */; };
+		6667933A1F47903900C81558 /* WWSeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1E71E228C1F00A4B8BD /* WWSeer.swift */; };
+		6667933B1F47903900C81558 /* WWPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CAC8FF1E26931700126610 /* WWPI.swift */; };
+		6667933C1F47903900C81558 /* WWRobber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CAC8FD1E268FD700126610 /* WWRobber.swift */; };
+		6667933D1F47903900C81558 /* WWWitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1E51E228BF600A4B8BD /* WWWitch.swift */; };
+		6667933E1F47903900C81558 /* WWTroublemaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1E31E228B6D00A4B8BD /* WWTroublemaker.swift */; };
+		6667933F1F47903900C81558 /* WWInsomniac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6620DC641E2AB9A4008D309C /* WWInsomniac.swift */; };
+		666793401F47903C00C81558 /* WWAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE931E21984B0075E277 /* WWAction.swift */; };
+		666793411F47903C00C81558 /* WWActionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1D31E22874F00A4B8BD /* WWActionData.swift */; };
+		666793421F47904000C81558 /* WWState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE961E2198C20075E277 /* WWState.swift */; };
+		666793431F47904000C81558 /* WWPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE981E21AB2F0075E277 /* WWPlayer.swift */; };
+		666793441F47904000C81558 /* WWGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAEE9A1E21AFAC0075E277 /* WWGame.swift */; };
+		666793451F47904400C81558 /* DictionaryMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1F51E22C08A00A4B8BD /* DictionaryMap.swift */; };
 		66CAC8FE1E268FD700126610 /* WWRobber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CAC8FD1E268FD700126610 /* WWRobber.swift */; };
 		66CAC9001E26931700126610 /* WWPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CAC8FF1E26931700126610 /* WWPI.swift */; };
 		66E7B1D41E22874F00A4B8BD /* WWActionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B1D31E22874F00A4B8BD /* WWActionData.swift */; };
@@ -34,6 +52,9 @@
 		6647C4F61E21938900650FFF /* WerewolfFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WerewolfFramework.h; sourceTree = "<group>"; };
 		6647C4F71E21938900650FFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6666FA551E2AC4FD0096BE12 /* WWCopycat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWCopycat.swift; path = Characters/WWCopycat.swift; sourceTree = "<group>"; };
+		6667932B1F478FBF00C81558 /* WerewolfFramework_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WerewolfFramework_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6667932D1F478FC000C81558 /* WerewolfFramework_Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WerewolfFramework_Mac.h; sourceTree = "<group>"; };
+		6667932E1F478FC000C81558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66CAC8FD1E268FD700126610 /* WWRobber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWRobber.swift; path = Characters/WWRobber.swift; sourceTree = "<group>"; };
 		66CAC8FF1E26931700126610 /* WWPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWPI.swift; path = Characters/WWPI.swift; sourceTree = "<group>"; };
 		66E7B1D31E22874F00A4B8BD /* WWActionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WWActionData.swift; path = Actions/WWActionData.swift; sourceTree = "<group>"; };
@@ -58,6 +79,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		666793271F478FBF00C81558 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -65,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				6647C4F51E21938900650FFF /* WerewolfFramework */,
+				6667932C1F478FC000C81558 /* WerewolfFramework_Mac */,
 				6647C4F41E21938900650FFF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				6647C4F31E21938900650FFF /* WerewolfFramework.framework */,
+				6667932B1F478FBF00C81558 /* WerewolfFramework_Mac.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,6 +118,15 @@
 				6647C4F71E21938900650FFF /* Info.plist */,
 			);
 			path = WerewolfFramework;
+			sourceTree = "<group>";
+		};
+		6667932C1F478FC000C81558 /* WerewolfFramework_Mac */ = {
+			isa = PBXGroup;
+			children = (
+				6667932D1F478FC000C81558 /* WerewolfFramework_Mac.h */,
+				6667932E1F478FC000C81558 /* Info.plist */,
+			);
+			path = WerewolfFramework_Mac;
 			sourceTree = "<group>";
 		};
 		66E7B1F41E22C07600A4B8BD /* Extensions */ = {
@@ -146,6 +185,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		666793281F478FBF00C81558 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6667932F1F478FC000C81558 /* WerewolfFramework_Mac.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -167,6 +214,24 @@
 			productReference = 6647C4F31E21938900650FFF /* WerewolfFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		6667932A1F478FBF00C81558 /* WerewolfFramework_Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 666793301F478FC000C81558 /* Build configuration list for PBXNativeTarget "WerewolfFramework_Mac" */;
+			buildPhases = (
+				666793261F478FBF00C81558 /* Sources */,
+				666793271F478FBF00C81558 /* Frameworks */,
+				666793281F478FBF00C81558 /* Headers */,
+				666793291F478FBF00C81558 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WerewolfFramework_Mac;
+			productName = WerewolfFramework_Mac;
+			productReference = 6667932B1F478FBF00C81558 /* WerewolfFramework_Mac.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -180,6 +245,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 58JLRGUCJQ;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+					};
+					6667932A1F478FBF00C81558 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 58JLRGUCJQ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -197,12 +267,20 @@
 			projectRoot = "";
 			targets = (
 				6647C4F21E21938900650FFF /* WerewolfFramework */,
+				6667932A1F478FBF00C81558 /* WerewolfFramework_Mac */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6647C4F11E21938900650FFF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		666793291F478FBF00C81558 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -233,6 +311,30 @@
 				6620DC631E2AB271008D309C /* WWMason.swift in Sources */,
 				66CAC8FE1E268FD700126610 /* WWRobber.swift in Sources */,
 				66EAEE9B1E21AFAC0075E277 /* WWGame.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		666793261F478FBF00C81558 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6667933A1F47903900C81558 /* WWSeer.swift in Sources */,
+				666793401F47903C00C81558 /* WWAction.swift in Sources */,
+				666793431F47904000C81558 /* WWPlayer.swift in Sources */,
+				6667933F1F47903900C81558 /* WWInsomniac.swift in Sources */,
+				666793411F47903C00C81558 /* WWActionData.swift in Sources */,
+				666793451F47904400C81558 /* DictionaryMap.swift in Sources */,
+				666793351F47903900C81558 /* WWCharacter.swift in Sources */,
+				6667933D1F47903900C81558 /* WWWitch.swift in Sources */,
+				666793381F47903900C81558 /* WWMinion.swift in Sources */,
+				6667933C1F47903900C81558 /* WWRobber.swift in Sources */,
+				666793391F47903900C81558 /* WWMason.swift in Sources */,
+				666793421F47904000C81558 /* WWState.swift in Sources */,
+				6667933B1F47903900C81558 /* WWPI.swift in Sources */,
+				666793361F47903900C81558 /* WWCopycat.swift in Sources */,
+				6667933E1F47903900C81558 /* WWTroublemaker.swift in Sources */,
+				666793371F47903900C81558 /* WWWerewolf.swift in Sources */,
+				666793441F47904000C81558 /* WWGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +455,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appcannon.WerewolfFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -374,6 +478,56 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appcannon.WerewolfFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		666793311F478FC000C81558 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 58JLRGUCJQ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = WerewolfFramework_Mac/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appcannon.WerewolfFramework-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		666793321F478FC000C81558 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 58JLRGUCJQ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = WerewolfFramework_Mac/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appcannon.WerewolfFramework-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -399,6 +553,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		666793301F478FC000C81558 /* Build configuration list for PBXNativeTarget "WerewolfFramework_Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				666793311F478FC000C81558 /* Debug */,
+				666793321F478FC000C81558 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
