@@ -10,11 +10,11 @@ import Foundation
 
 public class WWState: NSObject, NSCoding {
 	
-	public enum GameStatus: Int {
-		case starting
-		case night
-		case discussion
-		case nogame
+	public enum GameStatus: String {
+		case starting = "starting"
+		case night = "night"
+		case discussion = "discussion"
+		case nogame = "nogame"
 	}
 	
 	public var players: [WWPlayer]
@@ -92,7 +92,14 @@ public class WWState: NSObject, NSCoding {
 		}
 		
 		self.assignments = assignments
+
+        let status: GameStatus
+        if let string = decoder.decodeObject(forKey: "status") as? String {
+            status = GameStatus(rawValue: string) ?? .nogame
+        } else {
+            status = .nogame
+        }
 		
-		self.status = GameStatus(rawValue: decoder.decodeInteger(forKey: "status")) ?? .nogame
+		self.status = status
 	}
 }
